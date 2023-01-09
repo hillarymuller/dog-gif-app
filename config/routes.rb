@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :treats
   resources :dogs
   resources :users
   resources :households

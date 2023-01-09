@@ -1,3 +1,3 @@
 class TreatSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :dogs
 end

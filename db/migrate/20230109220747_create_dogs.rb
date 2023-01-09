@@ -18,7 +18,7 @@ class CreateDogs < ActiveRecord::Migration[6.1]
       t.string :potty_gif
       t.string :treat_gif
       t.string :nap_gif
-      t.references :user, null: false, foreign_key: true
+      t.references :user
 
       t.timestamps
     end

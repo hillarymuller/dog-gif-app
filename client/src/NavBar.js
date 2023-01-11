@@ -1,9 +1,99 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
-function NavBar() {
-    return (
-        <h1>NavBar</h1>
-    )
-};
-
+const style = {
+    width: "60%",
+    margin: "5% 0 1%",
+    padding: "1em",
+    textDecoration: "none",
+    color: "white",
+    fontWeight: "bold",
+    verticalAlign: "center",
+    fontFamily: "Optima, sans-serif"
+}
+function NavBar({user, handleLogout}) {
+ return (
+    <div>
+        <NavLink 
+        exact
+        style={style}
+        activeStyle={{
+            fontWeight: "bolder",
+            color: "#D26901"
+        }}
+        to='/'>
+            Home
+            </NavLink>
+        {user ? (
+        <>
+        <NavLink 
+        exact
+        style={style}
+        activeStyle={{
+            fontWeight: "bolder",
+            color: "#D26901"
+        }}
+        to='/dogs'>
+            All Dogs
+        </NavLink>
+        <NavLink
+        exact
+        style={style}
+        activeStyle={{
+            fontWeight: "bolder",
+            color: "#D26901"
+        }}
+        to='/user/:userId'>
+            My Dogs
+        </NavLink>
+        <NavLink
+        exact
+        style={style}
+        activeStyle={{
+            fontWeight: "bolder",
+            color: "#D26901"
+        }}
+        to='/household/:householdId'>
+            Household Dogs
+        </NavLink>
+        <button className="button" onClick={handleLogout}>
+            Logout
+        </button>
+</> ) : (
+    <>
+        <NavLink 
+        exact 
+        style={style}
+        activeStyle={{
+            fontWeight: "bolder",
+            color: "#D26901"
+        }}
+        to='/dogs'>
+            All Dogs
+            </NavLink>
+            <NavLink 
+            exact
+            style={style}
+            activeStyle={{
+                fontWeight: "bolder",
+                color: "#D26901"
+            }}
+            to="/signup">
+                Sign Up
+            </NavLink>
+            <NavLink 
+            exact 
+            style={style}
+            activeStyle={{
+                fontWeight: "bolder",
+                color: "#D26901"
+            }}
+            to='/login'>
+                Log In
+            </NavLink>
+            </>
+)}
+    </div>
+ )
+}
 export default NavBar;

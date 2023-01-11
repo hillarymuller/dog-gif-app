@@ -8,6 +8,8 @@ import DogCard from './DogCard';
 import DogsContainer from './DogsContainer';
 import NotFound from './NotFound';
 import React from 'react';
+import HouseholdDogs from './HouseholdDogs';
+import UserDogs from './UserDogs';
 
 function App() {
   return (
@@ -17,9 +19,16 @@ function App() {
         <h1>PUPPY RECESS</h1>
         <NavBar />
         </header>
+        <br></br>
        <Switch>
         <Route path="/dogs/:dogId">
           <DogCard />
+        </Route>
+        <Route path="/users/:userId">
+          <UserDogs />
+        </Route>
+        <Route path="/households/:householdId">
+          <HouseholdDogs />
         </Route>
         <Route path="/dogs">
           <DogsContainer />
@@ -30,7 +39,7 @@ function App() {
         <Route path="/signup">
           <SignupForm />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <Home />
         </Route>
         <Route path="*">

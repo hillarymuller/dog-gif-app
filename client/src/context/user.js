@@ -9,7 +9,7 @@ function UserProvider({ children }) {
     const getCurrentUser = useCallback(async () => {
         try {
             const resp = await fetch("/me")
-                if (resp.status.ok) {
+                if (resp.ok) {
                     const data = await resp.json()
                     setUser(data)
                 } else {
@@ -31,7 +31,7 @@ function UserProvider({ children }) {
                 },
                 body: JSON.stringify(userDetails)
             })
-            if (resp.status.ok) {
+            if (resp.ok) {
                 const data = await resp.json()
                 setUser(data)
                 return true
@@ -54,7 +54,7 @@ function UserProvider({ children }) {
                 },
                 body: JSON.stringify(userDetails)
             })
-            if (resp.status.ok) {
+            if (resp.ok) {
                 const data = await resp.json()
                 setUser(data)
             } else {

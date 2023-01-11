@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import {ErrorContext} from './error';
 const UserContext = React.createContext()
 
@@ -9,7 +9,7 @@ function UserProvider({ children }) {
     const getCurrentUser = useCallback(async () => {
         try {
             const resp = await fetch("/me")
-                if (resp.status === ok) {
+                if (resp.status.ok) {
                     const data = await resp.json()
                     setUser(data)
                 } else {
@@ -31,7 +31,7 @@ function UserProvider({ children }) {
                 },
                 body: JSON.stringify(userDetails)
             })
-            if (resp.status === ok) {
+            if (resp.status.ok) {
                 const data = await resp.json()
                 setUser(data)
                 return true
@@ -54,7 +54,7 @@ function UserProvider({ children }) {
                 },
                 body: JSON.stringify(userDetails)
             })
-            if (resp.status === ok) {
+            if (resp.status.ok) {
                 const data = await resp.json()
                 setUser(data)
             } else {
@@ -67,7 +67,7 @@ function UserProvider({ children }) {
     }
     const signout = async () => {
         try {
-            const resp = await fetch("/signout", {
+            await fetch("/signout", {
                 method: "DELETE"
             })
             setUser(null)
@@ -78,7 +78,7 @@ function UserProvider({ children }) {
         }
     }
     return (
-        <UserContext.Provider value={{ user, setUser, getCurrentUser, signin, signup, signout }}>
+        <UserContext.Provider value={{user, setUser, getCurrentUser, signin, signup, signout}}>
             {children}
         </UserContext.Provider>
     )

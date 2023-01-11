@@ -7,11 +7,19 @@ import SigninForm from './SigninForm';
 import DogCard from './DogCard';
 import DogsContainer from './DogsContainer';
 import NotFound from './NotFound';
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import HouseholdDogs from './HouseholdDogs';
 import UserDogs from './UserDogs';
+import {UserContext} from './context/user';
 
 function App() {
+  const { getCurrentUser } = useContext(UserContext);
+  console.log(getCurrentUser);
+
+  useEffect(() => {
+    getCurrentUser()
+  }, []);
+
   return (
     <div className="App">
       <Router>

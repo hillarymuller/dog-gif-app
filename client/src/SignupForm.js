@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import {ErrorContext} from './context/error';
+
 import {UserContext} from './context/user';
 
 
@@ -10,39 +10,24 @@ function SignupForm() {
         password: "",
         passwordConfirmation: ""
     })
-    const {error, setError} = useContext(ErrorContext);
-    const {setUser} = useContext(UserContext);
+    
+    const {signup} = useContext(UserContext);
   
 
     function handleChange(e) {
         setFormData({...formData, [e.target.name]: e.target.value,});
+        console.log(formData);
     }
     
     function handleSubmit(e) {
         e.preventDefault();
-        fetch('/signup', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({...formData, "password_confirmation": formData.passwordConfirmation})
-        })
-        .then(resp => {
-            if (resp.ok) {
-                resp.json()
-                .then(data => setUser(data))
-            } else {
-                resp.json()
-                .then(err => setError(err.error))
-            }
-        });
+        signup({...formData, password_confirmation: formData.passwordConfirmation})
     }
  
     return (
         <div>
+            <h2>Make an Account</h2>
             <form onSubmit={handleSubmit}>
-                {error ? (<h2 className="error">{error}</h2>) : null}
                 <label>
                     Name:
                     <input onChange={handleChange}
@@ -51,6 +36,7 @@ function SignupForm() {
                     value={formData.name}
                     />
                 </label>
+                <br></br>
                 <br></br>
                 <label>
                     Username:
@@ -61,6 +47,7 @@ function SignupForm() {
                     />
                 </label>
                 <br></br>
+                <br></br>
                 <label>
                     Email Address:
                     <input onChange={handleChange}
@@ -69,6 +56,7 @@ function SignupForm() {
                     value={formData.email}
                     />
                 </label>
+                <br></br>
                 <br></br>
                 <label>
                     Password:
@@ -79,6 +67,7 @@ function SignupForm() {
                     />
                 </label>
                 <br></br>
+                <br></br>
                 <label>
                     Confirm Password:
                     <input onChange={handleChange}
@@ -87,6 +76,7 @@ function SignupForm() {
                     value={formData.passwordConfirmation}
                     />
                 </label>
+                <br></br>
                 <br></br>
                 <button type="submit">Sign Up!</button>
             </form>

@@ -11,10 +11,12 @@ import React, { useEffect, useContext } from 'react';
 import HouseholdDogs from './HouseholdDogs';
 import UserDogs from './UserDogs';
 import {UserContext} from './context/user';
+import {ErrorContext} from './context/error';
 
 function App() {
   const { getCurrentUser } = useContext(UserContext);
-  console.log(getCurrentUser);
+  const {error} = useContext(ErrorContext);
+  
 
   useEffect(() => {
     getCurrentUser()
@@ -28,6 +30,7 @@ function App() {
         <NavBar />
         </header>
         <br></br>
+        <div className="error">{error ? error.map(err => <h3 className="error" key={err}>{err}</h3>) : null}</div>
        <Switch>
         <Route path="/dogs/:dogId">
           <DogCard />

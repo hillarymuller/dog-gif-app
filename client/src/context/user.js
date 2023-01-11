@@ -56,10 +56,11 @@ function UserProvider({ children }) {
             })
             if (resp.ok) {
                 const data = await resp.json()
-                setUser(data)
+                console.log(data)
             } else {
                 const errorMessage = await resp.json()
                 setError(errorMessage.error)
+                console.log(errorMessage.error)
             }
         } catch(err) {
             setError(err.error)

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import {NavLink} from 'react-router-dom';
 import {UserContext} from './context/user';
-import {ErrorContext} from './context/error';
+
 
 const style = {
     width: "60%",
@@ -15,7 +15,7 @@ const style = {
 }
 function NavBar() {
     const {user} = useContext(UserContext);
-    const {error} = useContext(ErrorContext);
+    
 
  return (
     <div>
@@ -98,7 +98,7 @@ function NavBar() {
             </NavLink>
             </>
 )}
-    <h1>{error}</h1>
+    
     </div>
  )
 }

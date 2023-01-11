@@ -11,7 +11,7 @@ const style = {
     verticalAlign: "center",
     fontFamily: "Optima, sans-serif"
 }
-function NavBar({user, handleLogout}) {
+function NavBar({user}) {
  return (
     <div>
         <NavLink 
@@ -43,7 +43,7 @@ function NavBar({user, handleLogout}) {
             fontWeight: "bolder",
             color: "#D26901"
         }}
-        to='/user/:userId'>
+        to='/users/:userId'>
             My Dogs
         </NavLink>
         <NavLink
@@ -53,11 +53,11 @@ function NavBar({user, handleLogout}) {
             fontWeight: "bolder",
             color: "#D26901"
         }}
-        to='/household/:householdId'>
+        to='/households/:householdId'>
             Household Dogs
         </NavLink>
-        <button className="button" onClick={handleLogout}>
-            Logout
+        <button className="button">
+            Sign Out
         </button>
 </> ) : (
     <>
@@ -88,8 +88,8 @@ function NavBar({user, handleLogout}) {
                 fontWeight: "bolder",
                 color: "#D26901"
             }}
-            to='/login'>
-                Log In
+            to='/signin'>
+                Sign In
             </NavLink>
             </>
 )}

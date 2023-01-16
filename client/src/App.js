@@ -7,7 +7,7 @@ import SigninForm from './SigninForm';
 import DogCard from './DogCard';
 import DogsContainer from './DogsContainer';
 import NotFound from './NotFound';
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import HouseholdDogs from './HouseholdDogs';
 import UserDogs from './UserDogs';
 import {UserContext} from './context/user';
@@ -15,14 +15,17 @@ import {ErrorContext} from './context/error';
 
 
 function App() {
-  const { getCurrentUser } = useContext(UserContext);
+  const { getCurrentUser, user } = useContext(UserContext);
   const {error} = useContext(ErrorContext);
+  const [loading, setLoading] = useState(true);
   
 
   useEffect(() => {
-    getCurrentUser()
+    getCurrentUser();
+    setLoading(false);
   }, []);
 
+console.log(user)
   return (
     <div className="App">
       <Router>
@@ -31,6 +34,7 @@ function App() {
         <NavBar />
         </header>
         <br></br>
+        {loading ? <h3>Loading Doggos...</h3> : null}
         <div className="error">{error ? <h3 className="error">{error}</h3> : null}</div>
        <Switch>
         <Route path="/dogs/:dogId">
@@ -40,7 +44,7 @@ function App() {
           <UserDogs />
         </Route>
         <Route path="/households/:householdId">
-          <HouseholdDogs />
+          <HouseholdDogs loading={loading} setLoading={setLoading} />
         </Route>
         <Route path="/dogs">
           <DogsContainer />

@@ -5,6 +5,10 @@ class HouseholdsController < ApplicationController
         households = Household.all
         render json: households
     end
+    def show
+        @household = Household.find(params[:id])
+        render json: @household
+    end
     def create
         household = Household.create!(household_params)
         render json: household
@@ -18,4 +22,5 @@ class HouseholdsController < ApplicationController
     def household_params
         params.permit(:name, :id, :users)
     end
+
 end

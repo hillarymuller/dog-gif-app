@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
+import {useHistory} from 'react-router-dom';
 
 
 function SigninForm() {
@@ -10,14 +11,16 @@ function SigninForm() {
     });
     const {signin} = useContext(UserContext);
     const {setError} = useContext(ErrorContext);
+    const history = useHistory();
 
     function handleChange(e) {
         setFormData({...formData, [e.target.name]: e.target.value,});
         setError(null);
     };
-    function handleSubmit(e) {
+   const handleSubmit = async (e) => {
         e.preventDefault();
         signin(formData);
+        history.push('/dogs')
     };
 
     return (
@@ -34,7 +37,7 @@ function SigninForm() {
                 Password:
                 <input onChange={handleChange}
                 type="text"
-                name="username"
+                name="password"
                 value={formData.password}
                 />
             </label>

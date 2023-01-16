@@ -1,8 +1,9 @@
 import React from 'react';
 
-function DogCard() {
+function DogCard({ dog }) {
+
     return (
-        <h1>Dog Card</h1>
+        <h1>{dog.name}</h1>
     )
 };
 

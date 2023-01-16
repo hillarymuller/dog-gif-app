@@ -1,12 +1,13 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React, { useState, useContext, } from 'react';
 import {ErrorContext} from './error';
+
 const UserContext = React.createContext()
 
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
     const {setError} = useContext(ErrorContext);
 
-    const getCurrentUser = useCallback(async () => {
+    const getCurrentUser = async () => {
         try {
             const resp = await fetch("/me")
                 if (resp.ok) {
@@ -19,7 +20,8 @@ function UserProvider({ children }) {
         } catch(err) {
             setError(err.error)
         }
-    }, [setError])
+    }
+
 
     const signin = async (userDetails) => {
         try {
@@ -34,7 +36,6 @@ function UserProvider({ children }) {
             if (resp.ok) {
                 const data = await resp.json()
                 setUser(data)
-                return true
             } else {
                 const errorMessage = await resp.json()
                 setError(errorMessage.error)

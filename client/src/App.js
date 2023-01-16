@@ -12,6 +12,7 @@ import HouseholdDogs from './HouseholdDogs';
 import UserDogs from './UserDogs';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
+import NewHouseholdForm from './NewHouseholdForm';
 
 function App() {
   const { getCurrentUser } = useContext(UserContext);
@@ -26,7 +27,7 @@ function App() {
     <div className="App">
       <Router>
         <header className="App-header">
-        <h1>PUPPY RECESS</h1>
+        <h1>PUPPY PLAYTIME</h1>
         <NavBar />
         </header>
         <br></br>
@@ -40,6 +41,9 @@ function App() {
         </Route>
         <Route path="/households/:householdId">
           <HouseholdDogs />
+        </Route>
+        <Route path="/households/new">
+          <NewHouseholdForm />
         </Route>
         <Route path="/dogs">
           <DogsContainer />

@@ -1,35 +1,57 @@
-import React, { useState, useContext } from 'react';
-
+import React, { useState, useContext, useEffect } from 'react';
+import {ErrorContext} from './context/error';
 import {UserContext} from './context/user';
+import NewHouseholdForm from './NewHouseholdForm';
+
 
 
 function SignupForm() {
     const [formData, setFormData] = useState({
         name: "",
         username: "",
+        email: "",
         password: "",
-        passwordConfirmation: ""
+        passwordConfirmation: "",
+        householdId: 0
     })
-    
+    const {setError} = useContext(ErrorContext);
     const {signup} = useContext(UserContext);
+    const [households, setHouseholds] = useState([]);
   
+    const fetchHouseholds = async () => {
+        try {
+            const resp = await fetch('/households');
+            const data = await resp.json();
+            setHouseholds(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        fetchHouseholds();
+    }, []);
 
     function handleChange(e) {
         setFormData({...formData, [e.target.name]: e.target.value,});
-        console.log(formData);
+        setError(null);
     }
     
     function handleSubmit(e) {
         e.preventDefault();
-        signup({...formData, password_confirmation: formData.passwordConfirmation})
+        signup({...formData, password_confirmation: formData.passwordConfirmation, household_id: formData.householdId})
     }
- 
+    
+    function addNewHousehold(newHousehold) {
+        console.log(newHousehold);
+        fetchHouseholds();
+    }
+
     return (
         <div>
             <h2>Make an Account</h2>
             <form onSubmit={handleSubmit}>
                 <label>
-                    Name:
+                    Name: 
                     <input onChange={handleChange}
                     type="text"
                     name="name"
@@ -39,7 +61,7 @@ function SignupForm() {
                 <br></br>
                 <br></br>
                 <label>
-                    Username:
+                    Username: 
                     <input onChange={handleChange}
                     type="text"
                     name="username"
@@ -49,7 +71,7 @@ function SignupForm() {
                 <br></br>
                 <br></br>
                 <label>
-                    Email Address:
+                    Email Address: 
                     <input onChange={handleChange}
                     type="text"
                     name="email"
@@ -59,7 +81,7 @@ function SignupForm() {
                 <br></br>
                 <br></br>
                 <label>
-                    Password:
+                    Password: 
                     <input onChange={handleChange}
                     type="text"
                     name="password"
@@ -69,7 +91,7 @@ function SignupForm() {
                 <br></br>
                 <br></br>
                 <label>
-                    Confirm Password:
+                    Confirm Password:     
                     <input onChange={handleChange}
                     type="text"
                     name="passwordConfirmation"
@@ -78,8 +100,21 @@ function SignupForm() {
                 </label>
                 <br></br>
                 <br></br>
-                <button type="submit">Sign Up!</button>
+                <label>
+                    Household:
+                    <select value={formData.householdId}
+                    onChange={handleChange}
+                    name="householdId">
+                        <option>Please choose a household</option>
+                        {households.map(household => <option value={household.id} key={household.id}>{household.name}</option>)}
+                    </select>
+                    <br></br>
+                    <br></br>
+                </label>
+                <button className="button" type="submit">Sign Up!</button>
             </form>
+            <h3>No household yet?</h3>
+            <NewHouseholdForm addNewHousehold={addNewHousehold} />
         </div>
     )
 };

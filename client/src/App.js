@@ -12,7 +12,7 @@ import HouseholdDogs from './HouseholdDogs';
 import UserDogs from './UserDogs';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
-import NewHouseholdForm from './NewHouseholdForm';
+
 
 function App() {
   const { getCurrentUser } = useContext(UserContext);
@@ -31,7 +31,7 @@ function App() {
         <NavBar />
         </header>
         <br></br>
-        <div className="error">{error ? error.map(err => <h3 className="error" key={err}>{err}</h3>) : null}</div>
+        <div className="error">{error ? <h3 className="error">{error}</h3> : null}</div>
        <Switch>
         <Route path="/dogs/:dogId">
           <DogCard />
@@ -41,9 +41,6 @@ function App() {
         </Route>
         <Route path="/households/:householdId">
           <HouseholdDogs />
-        </Route>
-        <Route path="/households/new">
-          <NewHouseholdForm />
         </Route>
         <Route path="/dogs">
           <DogsContainer />

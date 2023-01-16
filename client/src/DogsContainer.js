@@ -21,7 +21,7 @@ function DogsContainer() {
     
     return (
         <div>
-            <h1>All Dogs</h1>
+            <h1 className="title">All Dogs</h1>
             <DogsList dogs={dogs} />
         </div>
     )

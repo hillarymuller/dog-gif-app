@@ -12,6 +12,7 @@ import HouseholdDogs from './HouseholdDogs';
 import UserDogs from './UserDogs';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
+import DogPage from './DogPage';
 
 
 function App() {
@@ -38,7 +39,7 @@ console.log(user)
         <div className="error">{error ? <h3 className="error">{error}</h3> : null}</div>
        <Switch>
         <Route path="/dogs/:dogId">
-          <DogCard />
+          <DogPage />
         </Route>
         <Route path="/users/:userId">
           <UserDogs />

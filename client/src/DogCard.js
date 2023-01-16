@@ -8,13 +8,14 @@ function DogCard({ dog }) {
     const {setError} = useContext(ErrorContext);
 
     function handleClick() {
+        if (adopted === false) {
         fetch(`/dogs/${id}`, {
-        method: "PATCH",
-        headers: {
+            method: "PATCH",
+            headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            adopted: !dog.adopted,
+            adopted: !adopted,
             user_id: user.id,
         }),
     })
@@ -28,7 +29,29 @@ function DogCard({ dog }) {
             .then(err => setError(err.error))
         } 
     });
+} else {
+    fetch(`/dogs/${id}`, {
+        method: "PATCH",
+        headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        adopted: !adopted,
+        user_id: null,
+    }),
+})
+.then(r => {
+    if (r.ok) {
+        r.json()
+        .then(data => console.log(data))
+
+    } else {
+        r.json()
+        .then(err => setError(err.error))
+    } 
+});
 }
+    }
     return (
         <div className="card">
         <h1>{name}</h1>

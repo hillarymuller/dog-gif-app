@@ -4,7 +4,6 @@ import Home from './Home';
 import NavBar from './NavBar';
 import SignupForm from './SignupForm';
 import SigninForm from './SigninForm';
-import DogCard from './DogCard';
 import DogsContainer from './DogsContainer';
 import NotFound from './NotFound';
 import React, { useEffect, useContext, useState } from 'react';

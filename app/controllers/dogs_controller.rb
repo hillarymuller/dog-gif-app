@@ -22,7 +22,7 @@ class DogsController < ApplicationController
   
     private
     def dog_params
-        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty)
+        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty, :adopted)
     end
     def find_dog
         @dog = Dog.find(params[:id])

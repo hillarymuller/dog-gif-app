@@ -29,6 +29,7 @@ code {
   padding: 10px 10px;
   color: rgb(2, 38, 21);
   object-fit: cover;
+  height: 100%;
 }
 
 .button {
@@ -47,5 +48,6 @@ code {
 }
 .float {
   float: left;
-  padding: 5px 10px 20px 20px;
+  padding: 0 10px 0px 0px;
+  height: 380px;
 }

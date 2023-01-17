@@ -216,7 +216,7 @@ function DogPage() {
                 r.json()
                 .then(data => {
                     updateDog(data)
-                    setDisplay(data.water_gif)
+                    setDisplay(data.drink_gif)
                 })
             } else {
                 r.json()

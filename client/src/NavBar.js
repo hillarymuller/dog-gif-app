@@ -48,7 +48,7 @@ function NavBar() {
             fontWeight: "bolder",
             color: "#D26901"
         }}
-        to='/users/:userId'>
+        to={`/users/${user.id}`}>
             My Dogs
         </NavLink>
         <NavLink
@@ -58,7 +58,7 @@ function NavBar() {
             fontWeight: "bolder",
             color: "#D26901"
         }}
-        to='/households/:householdId'>
+        to={`/households/${user.household.id}`}>
             Household Dogs
         </NavLink>
         <button className="button">

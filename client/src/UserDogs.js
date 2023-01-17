@@ -19,10 +19,15 @@ function UserDogs() {
         fetchDogs();
         console.log(dogs);
     }, []);
+    function updateDogs(editedDog) {
+        setDogs(dogs.filter(dog => {
+            return dog.id !== editedDog.id
+        }))
+    }
     return (
         <div>
         <h1>My Dogs</h1>
-        <DogsList dogs={dogs} />
+        <DogsList dogs={dogs} updateDogs={updateDogs} />
         </div>
     )
 };

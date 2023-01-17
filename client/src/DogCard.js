@@ -3,7 +3,7 @@ import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
 
 
-function DogCard({ dog }) {
+function DogCard({ dog, updateDogs }) {
     const [currentDog, setCurrentDog] = useState(dog);
     const {adopted, name, image, id} = currentDog;
     const {user} = useContext(UserContext);
@@ -51,7 +51,8 @@ function DogCard({ dog }) {
         r.json()
         .then(data => {
             console.log(data);
-            setCurrentDog(data)
+            setCurrentDog(data);
+            updateDogs(data);
         })
 
     } else {

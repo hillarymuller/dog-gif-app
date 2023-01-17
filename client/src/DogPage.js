@@ -46,6 +46,7 @@ function DogPage() {
                 r.json()
                 .then(data => {
                     updateDog(data)
+                    setDisplay(data.eat_gif)
                 })
             } else {
                 r.json()
@@ -69,7 +70,10 @@ function DogPage() {
         .then(r => {
             if (r.ok) {
                 r.json()
-                .then(data => updateDog(data))
+                .then(data => {
+                    updateDog(data)
+                    setDisplay(data.potty_gif)
+                })
             } else {
                 r.json()
                 .then(err => setError(err.error))
@@ -161,7 +165,10 @@ function DogPage() {
         .then(r => {
             if (r.ok) {
                 r.json()
-                .then(data => updateDog(data))
+                .then(data => {
+                    updateDog(data)
+                    setDisplay(data.pet_gif)
+                })
             } else {
                 r.json()
                 .then(err => setError(err.error))
@@ -207,7 +214,10 @@ function DogPage() {
         .then(r => {
             if (r.ok) {
                 r.json()
-                .then(data => updateDog(data))
+                .then(data => {
+                    updateDog(data)
+                    setDisplay(data.water_gif)
+                })
             } else {
                 r.json()
                 .then(err => setError(err.error))

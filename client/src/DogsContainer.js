@@ -18,11 +18,13 @@ function DogsContainer() {
         console.log(dogs);
     }, []);
     
-    
+    function updateDogs(data) {
+        console.log(data);
+    }
     return (
         <div>
             <h1 className="title">All Dogs</h1>
-            <DogsList dogs={dogs} />
+            <DogsList dogs={dogs} updateDogs={updateDogs} />
         </div>
     )
 };

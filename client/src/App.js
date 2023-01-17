@@ -41,13 +41,13 @@ console.log(user)
           <DogPage />
         </Route>
         <Route path="/users/:userId">
-          <UserDogs />
+          <UserDogs user={user}/>
         </Route>
         <Route path="/households/:householdId">
-          <HouseholdDogs loading={loading} setLoading={setLoading} />
+          <HouseholdDogs loading={loading} setLoading={setLoading} user={user}/>
         </Route>
         <Route path="/dogs">
-          <DogsContainer />
+          <DogsContainer user={user}/>
         </Route>
         <Route path="/signin">
           <SigninForm />

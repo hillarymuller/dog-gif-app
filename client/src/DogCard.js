@@ -1,11 +1,12 @@
 import React, {useContext, useState} from 'react';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
+import { Link } from 'react-router-dom';
 
 
 function DogCard({ dog, updateDogs }) {
     const [currentDog, setCurrentDog] = useState(dog);
-    const {adopted, name, image, id} = currentDog;
+    const {adopted, name, image, id, user_id: userId} = currentDog;
     const {user} = useContext(UserContext);
     const {setError} = useContext(ErrorContext);
     
@@ -67,6 +68,7 @@ function DogCard({ dog, updateDogs }) {
         <h1>{name}</h1>
         <img src={`${image}`} alt={`a cute photo of ${name}`}></img>
         <button className="button" onClick={handleClick}>{adopted ? "Give back to shelter?" : "Adopt Me!"}</button>
+        {(userId === user.id) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
         </div>
     )
 };

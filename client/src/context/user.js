@@ -1,4 +1,4 @@
-import React, { useState, useContext, } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import {ErrorContext} from './error';
 
 const UserContext = React.createContext()
@@ -7,20 +7,20 @@ function UserProvider({ children }) {
     const [user, setUser] = useState(null);
     const {setError} = useContext(ErrorContext);
 
-    const getCurrentUser = async () => {
-        try {
-            const resp = await fetch("/me")
-                if (resp.ok) {
-                    const data = await resp.json()
+    const getCurrentUser = useCallback(async () => {
+        try { 
+            const r = await fetch("/me")
+            if (r.ok) {
+                    const data = await r.json()
                     setUser(data)
                 } else {
-                    const errorMessage = await resp.json()
-                    setError(errorMessage.error)
+                    const err = await r.json()
+                    setError(err.error)
                 }
-        } catch(err) {
-            setError(err.error)
+        } catch (error) {
+            setError(error.error)
         }
-    }
+    }, [setError])
 
 
     const signin = async (userDetails) => {

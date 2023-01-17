@@ -6,6 +6,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .title {
   text-align: center;
 }
@@ -27,7 +28,9 @@ code {
   border: 6px solid #D26901;
   padding: 10px 10px;
   color: rgb(2, 38, 21);
+  object-fit: cover;
 }
+
 .button {
   background-color: white;
   border: 2px solid #191970;
@@ -41,4 +44,8 @@ code {
 .error {
   color: white;
   background-color:  #D26901;
+}
+.float {
+  float: left;
+  padding: 5px 10px 20px 20px;
 }

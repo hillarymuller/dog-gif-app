@@ -1,11 +1,14 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
 
+
 function DogCard({ dog }) {
-    const {adopted, name, image, id} = dog;
+    const [currentDog, setCurrentDog] = useState(dog);
+    const {adopted, name, image, id} = currentDog;
     const {user} = useContext(UserContext);
     const {setError} = useContext(ErrorContext);
+    
 
     function handleClick() {
         if (adopted === false) {
@@ -22,7 +25,10 @@ function DogCard({ dog }) {
     .then(r => {
         if (r.ok) {
             r.json()
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data)
+                setCurrentDog(data)
+            })
 
         } else {
             r.json()
@@ -43,7 +49,10 @@ function DogCard({ dog }) {
 .then(r => {
     if (r.ok) {
         r.json()
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data);
+            setCurrentDog(data)
+        })
 
     } else {
         r.json()

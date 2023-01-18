@@ -51,3 +51,6 @@ code {
   padding: 0 10px 0px 0px;
   height: 380px;
 }
+.password {
+  -webkit-text-security: disc;
+}

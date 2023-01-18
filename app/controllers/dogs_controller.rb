@@ -1,6 +1,6 @@
 class DogsController < ApplicationController
     skip_before_action :authorize, only: :index
-    before_action :find_dog, except: :index
+    before_action :find_dog, except: [:index, :create]
     
     def index
         dogs = Dog.all
@@ -9,6 +9,11 @@ class DogsController < ApplicationController
 
     def show
         render json: @dog
+    end
+
+    def create
+        dog = Dog.create!(dog_params)
+        render json: dog, status: :created
     end
 
     def update
@@ -22,7 +27,7 @@ class DogsController < ApplicationController
   
     private
     def dog_params
-        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty, :adopted)
+        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty, :adopted, :eat_gif, :drink_gif, :potty_gif, :play_gif, :treat_gif, :nap_gif, :walk_gif, :jog_gif, :pet_gif)
     end
     def find_dog
         @dog = Dog.find(params[:id])

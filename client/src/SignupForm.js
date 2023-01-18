@@ -85,6 +85,7 @@ function SignupForm() {
                     <input onChange={handleChange}
                     type="text"
                     name="password"
+                    className="password"
                     value={formData.password}
                     />
                 </label>
@@ -95,6 +96,7 @@ function SignupForm() {
                     <input onChange={handleChange}
                     type="text"
                     name="passwordConfirmation"
+                    className="password"
                     value={formData.passwordConfirmation}
                     />
                 </label>

@@ -39,6 +39,7 @@ function SigninForm() {
                 <input onChange={handleChange}
                 type="text"
                 name="password"
+                className="password"
                 value={formData.password}
                 />
             </label>

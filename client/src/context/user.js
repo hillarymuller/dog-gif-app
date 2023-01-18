@@ -15,7 +15,7 @@ function UserProvider({ children }) {
                     setUser(data)
                 } else {
                     const err = await r.json()
-                    setError(err.error)
+                    console.log(err.error)
                 }
         } catch (error) {
             setError(error.error)
@@ -36,6 +36,7 @@ function UserProvider({ children }) {
             if (resp.ok) {
                 const data = await resp.json()
                 setUser(data)
+                return true
             } else {
                 const errorMessage = await resp.json()
                 setError(errorMessage.error)
@@ -58,6 +59,7 @@ function UserProvider({ children }) {
             if (resp.ok) {
                 const data = await resp.json()
                 console.log(data)
+                return true
             } else {
                 const errorMessage = await resp.json()
                 setError(errorMessage.error)

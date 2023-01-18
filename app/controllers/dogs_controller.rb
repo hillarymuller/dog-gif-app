@@ -27,7 +27,7 @@ class DogsController < ApplicationController
     def destroy
         if @current_user.name.downcase == "hillary"
             if @dog.delete
-                render json: "successfully deleted", status: :ok
+                render json: @dog, status: :ok
             else
                 render json: {error: "Was not able to delete"}, status: :not_found
             end

@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import DogsList from './DogsList';
 
+
 function DogsContainer() {
     const [dogs, setDogs] = useState([]);
+    
 
     const fetchDogs = async () => {
         try {
@@ -19,7 +21,7 @@ function DogsContainer() {
     }, []);
     
     function updateDogs(data) {
-        console.log(data);
+        fetchDogs();
     }
     return (
         <div>

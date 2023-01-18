@@ -25,7 +25,10 @@ function NewHouseholdForm({ addNewHousehold }) {
         .then(r => {
             if (r.ok) {
                 r.json()
-                .then(data => addNewHousehold(data))
+                .then(data => {
+                    addNewHousehold(data)
+                    setError("Household successfully created")
+                })
             } else {
                 r.json()
                 .then(err => setError(err.error))

@@ -71,6 +71,6 @@ ActiveRecord::Schema.define(version: 2023_01_09_220921) do
     t.index ["household_id"], name: "index_users_on_household_id"
   end
 
-  add_foreign_key "dog_treats", "dogs"
+  add_foreign_key "dog_treats", "dogs", on_delete: :cascade
   add_foreign_key "dog_treats", "treats"
 end

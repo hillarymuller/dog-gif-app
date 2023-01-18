@@ -7,7 +7,7 @@ import DogsList from './DogsList';
 function UserDogs() {
    
     const {setError} = useContext(ErrorContext);
-    const {user, getCurrentUser} = useContext(UserContext);
+    const {user} = useContext(UserContext);
     const [dogs, setDogs] = useState([]);
     const fetchDogs = async () => {
         try {

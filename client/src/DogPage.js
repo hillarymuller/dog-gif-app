@@ -254,7 +254,10 @@ function DogPage() {
     function updateDog(updatedDog) {
         setDog(updatedDog);
     }
-    if (!user) return (<Redirect to='/signin' />)
+    if (!user) {
+        setError("Not authorized")
+        return (<Redirect to='/signin' />)
+    }
     if (loading) return <h2>Loading Dog...</h2>
     return (
         <div className="card">

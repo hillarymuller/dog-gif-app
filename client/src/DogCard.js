@@ -65,13 +65,26 @@ function DogCard({ dog, updateDogs }) {
 });
 }
     }
+    function handleDelete(id) {
+        fetch(`/dogs/${id}`, {
+            method: "DELETE"
+        })
+        .then(r => {
+            if (r.ok) {
+                updateDogs()
+            } else {
+                r.json()
+                .then(err => setError(err.error))
+            }
+        })
+    }
     return (
         <div className="card">
         <h1>{name}</h1>
         <img src={`${image}`} alt={`a cute photo of ${name}`}></img>
         {user ? <button className="button" onClick={handleClick}>{adopted ? "Give back to shelter?" : (`Adopt ${name}!`)}</button> : null}
         {(user && (userId === user.id)) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
-        {(user && user.name.toLowerCase() === "hillary") ? <button className="button">Delete Dog</button> : null}
+        {(user && user.name.toLowerCase() === "hillary") ? <button className="button" onClick={() => handleDelete(id)}>Delete Dog</button> : null}
         </div>
     )
 };

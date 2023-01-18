@@ -12,19 +12,21 @@ import UserDogs from './UserDogs';
 import {UserContext} from './context/user';
 import ErrorMessage from './ErrorMessage';
 import DogPage from './DogPage';
-
+import {ErrorContext} from './context/error';
 
 function App() {
   const { getCurrentUser, user } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
-  
+  const {setError} = useContext(ErrorContext);
 
   useEffect(() => {
     getCurrentUser();
-    setLoading(false);
+    if (user) {
+      setLoading(false)
+    }
   }, []);
 
-console.log(user)
+
   return (
     <div className="App">
       <Router>
@@ -33,7 +35,6 @@ console.log(user)
         <NavBar />
         </header>
         <br></br>
-        {loading ? <h3>Loading Doggos...</h3> : null}
         <ErrorMessage />
        <Switch>
         <Route path="/dogs/:dogId">

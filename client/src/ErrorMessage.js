@@ -8,7 +8,8 @@ function ErrorMessage() {
         if (!error) {
             setVisible(false)
             return
-        } else {
+        } 
+        else {
             setVisible(true)
             const timer = setTimeout(() => {
                 setVisible(false)

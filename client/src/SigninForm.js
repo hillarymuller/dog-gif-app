@@ -19,9 +19,11 @@ function SigninForm() {
     };
    const handleSubmit = async (e) => {
         e.preventDefault();
-        signin(formData);
-        setError("Successfully signed in")
-        history.push('/dogs')
+        const success = await signin(formData);
+        if (success) {
+            setError("Successfully signed in")
+            history.push('/dogs')
+        }
     };
 
     return (

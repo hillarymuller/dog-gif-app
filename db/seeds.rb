@@ -55,7 +55,7 @@ Dog.create([{
     potty: 10, 
     adopted: false, 
     eat_gif: "https://media.giphy.com/media/75TSed4SRSMQJDdonH/giphy-downsized-large.gif", 
-    image: "", 
+    image: "https://media.giphy.com/media/3tEqyDYUTEZE2SHADf/giphy.gif", 
     play_gif: "https://media.giphy.com/media/x47etWFzZieD1zjAcy/giphy-downsized-large.gif", 
     walk_gif: "", 
     jog_gif: "", 

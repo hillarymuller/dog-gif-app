@@ -29,6 +29,7 @@ function DogCard({ dog, updateDogs }) {
             .then(data => {
                 console.log(data)
                 setCurrentDog(data)
+                updateDogs()
             })
 
         } else {
@@ -53,7 +54,7 @@ function DogCard({ dog, updateDogs }) {
         .then(data => {
             console.log(data);
             setCurrentDog(data);
-            updateDogs(data);
+            updateDogs()
         })
 
     } else {

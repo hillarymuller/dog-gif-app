@@ -8,8 +8,10 @@ function HouseholdDogs() {
     const [dogs, setDogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const {setError} = useContext(ErrorContext);
-    const {user} = useContext(UserContext);
-    useEffect(() => {
+    const {user, getCurrentUser} = useContext(UserContext);
+  
+    function fetchDogs() {
+        (user ? (
         fetch(`/households/${user.household.id}`)
         .then(r => {
             if (r.ok) {
@@ -21,12 +23,14 @@ function HouseholdDogs() {
             .then(err => setError(err.error))
         }
         })
-    }, []);
+        ) : getCurrentUser())
+    }
+    useEffect(() => {
+        fetchDogs();
+    }, [user]);
 
-    function updateDogs(editedDog) {
-        setDogs(dogs.filter(dog => {
-            return dog.id !== editedDog.id
-        }))
+    function updateDogs() {
+        fetchDogs();
     }
     
     return (

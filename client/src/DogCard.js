@@ -30,6 +30,7 @@ function DogCard({ dog, updateDogs }) {
                 console.log(data)
                 setCurrentDog(data)
                 updateDogs()
+                setError(`Successfully adopted ${data.name}`)
             })
 
         } else {
@@ -68,8 +69,8 @@ function DogCard({ dog, updateDogs }) {
         <div className="card">
         <h1>{name}</h1>
         <img src={`${image}`} alt={`a cute photo of ${name}`}></img>
-        <button className="button" onClick={handleClick}>{adopted ? "Give back to shelter?" : "Adopt Me!"}</button>
-        {(userId === user.id) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
+        {user ? <button className="button" onClick={handleClick}>{adopted ? "Give back to shelter?" : "Adopt Me!"}</button> : null}
+        {(user && (userId === user.id)) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
         </div>
     )
 };

@@ -10,13 +10,12 @@ import React, { useEffect, useContext, useState } from 'react';
 import HouseholdDogs from './HouseholdDogs';
 import UserDogs from './UserDogs';
 import {UserContext} from './context/user';
-import {ErrorContext} from './context/error';
+import ErrorMessage from './ErrorMessage';
 import DogPage from './DogPage';
 
 
 function App() {
   const { getCurrentUser, user } = useContext(UserContext);
-  const {error} = useContext(ErrorContext);
   const [loading, setLoading] = useState(true);
   
 
@@ -35,7 +34,7 @@ console.log(user)
         </header>
         <br></br>
         {loading ? <h3>Loading Doggos...</h3> : null}
-        <div className="error">{error ? <h3 className="error">{error}</h3> : null}</div>
+        <ErrorMessage />
        <Switch>
         <Route path="/dogs/:dogId">
           <DogPage />

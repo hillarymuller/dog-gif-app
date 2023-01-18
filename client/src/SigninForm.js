@@ -20,6 +20,7 @@ function SigninForm() {
    const handleSubmit = async (e) => {
         e.preventDefault();
         signin(formData);
+        setError("Successfully signed in")
         history.push('/dogs')
     };
 

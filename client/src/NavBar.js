@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import {UserContext} from './context/user';
+import {ErrorContext} from './context/error';
 
 
 const style = {
@@ -14,8 +15,14 @@ const style = {
     fontFamily: "Optima, sans-serif"
 }
 function NavBar() {
-    const {user} = useContext(UserContext);
+    const {user, signout} = useContext(UserContext);
+    const {setError} = useContext(ErrorContext);
     
+    function handleSignout(){
+        signout();
+        setError("Successfully signed out")
+         return <Redirect to="/signin" />
+    }
 
  return (
     <div>
@@ -61,7 +68,7 @@ function NavBar() {
         to={`/households/${user.household.id}`}>
             Household Dogs
         </NavLink>
-        <button className="button">
+        <button className="button" onClick={handleSignout} >
             Sign Out
         </button>
 </> ) : (

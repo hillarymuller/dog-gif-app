@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, Redirect} from 'react-router-dom';
 import {ErrorContext} from './context/error';
+import {UserContext} from './context/user';
 
 function DogPage() {
     const {dogId} = useParams();
@@ -9,6 +10,7 @@ function DogPage() {
     const [loading, setLoading] = useState(true);
     const {name, image, hunger, thirst, potty, energy, happiness, id} = dog;
     const [display, setDisplay] = useState(null);
+    const {user} = useContext(UserContext);
 
     
 
@@ -252,6 +254,7 @@ function DogPage() {
     function updateDog(updatedDog) {
         setDog(updatedDog);
     }
+    if (!user) return (<Redirect to='/signin' />)
     if (loading) return <h2>Loading Dog...</h2>
     return (
         <div className="card">

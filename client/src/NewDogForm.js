@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
-import {Redirect, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 function NewDogForm({ updateDogs }) {
     const {user, getCurrentUser} = useContext(UserContext);
@@ -23,7 +23,6 @@ function NewDogForm({ updateDogs }) {
         napGif: "",
         playGif: "", 
         pottyGif: "",
-        petGif: "",
         userId: null,
         adopted: false, 
         walkGif: "",
@@ -48,7 +47,6 @@ function NewDogForm({ updateDogs }) {
                 "nap_gif": formData.napGif,
                 "play_gif": formData.playGif, 
                 "potty_gif": formData.pottyGif,
-                "pet_gif": formData.petGif,
                 "walk_gif": formData.walkGif,
                 "jog_gif": formData.jogGif, 
                 "user_id": null, 
@@ -73,7 +71,6 @@ function NewDogForm({ updateDogs }) {
                         drinkGif: "",
                         image: "",
                         treatGif: "",
-                        petGif: "",
                         napGif: "",
                         playGif: "", 
                         pottyGif: "",

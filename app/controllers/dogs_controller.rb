@@ -24,6 +24,17 @@ class DogsController < ApplicationController
             render json: { error: "Not authorized" }, status: :unauthorized
         end
     end
+    def destroy
+        if @current_user.name.downcase == "hillary"
+            if @dog.delete
+                render json: "successfully deleted", status: :ok
+            else
+                render json: {error: "Was not able to delete"}, status: :not_found
+            end
+        else
+            render json: {error: "Not authorized"}, status: :unauthorized
+        end
+    end
   
     private
     def dog_params

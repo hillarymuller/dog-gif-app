@@ -71,6 +71,7 @@ function DogCard({ dog, updateDogs }) {
         <img src={`${image}`} alt={`a cute photo of ${name}`}></img>
         {user ? <button className="button" onClick={handleClick}>{adopted ? "Give back to shelter?" : (`Adopt ${name}!`)}</button> : null}
         {(user && (userId === user.id)) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
+        {(user && user.name.toLowerCase() === "hillary") ? <button className="button">Delete Dog</button> : null}
         </div>
     )
 };

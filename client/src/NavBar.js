@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {NavLink, Redirect} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
 
@@ -17,11 +17,12 @@ const style = {
 function NavBar() {
     const {user, signout} = useContext(UserContext);
     const {setError} = useContext(ErrorContext);
+    const history = useHistory();
     
     function handleSignout(){
         signout();
         setError("Successfully signed out")
-         return <Redirect to="/signin" />
+        history.push('/signin')
     }
 
  return (

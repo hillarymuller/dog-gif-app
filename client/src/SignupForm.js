@@ -38,7 +38,10 @@ function SignupForm() {
     
     function handleSubmit(e) {
         e.preventDefault();
-        signup({...formData, password_confirmation: formData.passwordConfirmation, household_id: formData.householdId})
+        const success = signup({...formData, password_confirmation: formData.passwordConfirmation, household_id: formData.householdId});
+        if (success) {
+            setError("Successfully signed up!")
+        }
     }
     
     function addNewHousehold(newHousehold) {

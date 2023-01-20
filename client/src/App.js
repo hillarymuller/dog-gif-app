@@ -13,6 +13,8 @@ import {UserContext} from './context/user';
 import ErrorMessage from './ErrorMessage';
 import DogPage from './DogPage';
 import {ErrorContext} from './context/error';
+import DogForm from './DogForm';
+import EditDog from './EditDog';
 
 function App() {
   const { getCurrentUser, user } = useContext(UserContext);
@@ -37,15 +39,23 @@ function App() {
         <br></br>
         <ErrorMessage />
        <Switch>
+       <Route path="/dogs/new">
+          <DogForm />
+        </Route>
+        <Route path="/dogs/:dogId/edit">
+          <EditDog />
+        </Route>
         <Route path="/dogs/:dogId">
           <DogPage />
         </Route>
+        
         <Route path="/users/:userId">
           <UserDogs user={user}/>
         </Route>
         <Route path="/households/:householdId">
           <HouseholdDogs loading={loading} setLoading={setLoading} user={user}/>
         </Route>
+      
         <Route path="/dogs">
           <DogsContainer user={user}/>
         </Route>

@@ -24,6 +24,12 @@ class DogsController < ApplicationController
             render json: { error: "Not authorized" }, status: :unauthorized
         end
     end
+
+    def adopt
+        @dog&.update!(dog_params)
+        render json: @dog
+    end
+
     def destroy
         if @current_user.username.downcase == "hillarymuller"
             if @dog.delete
@@ -38,14 +44,10 @@ class DogsController < ApplicationController
   
     private
     def dog_params
-        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty, :adopted, :eat_gif, :drink_gif, :potty_gif, :play_gif, :treat_gif, :nap_gif, :walk_gif, :jog_gif, :pet_gif)
+        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty, :adopted, :eat_gif, :drink_gif, :potty_gif, :play_gif, :treat_gif, :nap_gif, :walk_gif, :jog_gif, :pet_gif, :image, :name)
     end
     def find_dog
         @dog = Dog.find(params[:id])
     end
-  #  def check_user_for_hillary
-   #     if @current_user.name.downcase == "hillary"
-    #        return true
-     #   else render json: {error: "Not authorized"}, status: :unauthorized
-    #end
+
 end

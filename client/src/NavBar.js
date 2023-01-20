@@ -69,6 +69,16 @@ function NavBar() {
         to={`/households/${user.household.id}`}>
             Household Dogs
         </NavLink>
+        <NavLink
+        exact
+        style={style}
+        activeStyle={{
+            fontWeight: "bolder",
+            color: "#D26901"
+        }}
+        to={`/dogs/new`}>
+            Add a Dog
+        </NavLink>
         <button className="button" onClick={handleSignout} >
             Sign Out
         </button>

@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {ErrorContext} from './context/error';
 import {UserContext} from './context/user';
-import NewDogForm from './NewDogForm';
 import DogsList from './DogsList';
 
 function UserDogs() {
@@ -32,7 +31,6 @@ function UserDogs() {
         <div>
         <h1>My Dogs</h1>
         <DogsList dogs={dogs} updateDogs={updateDogs} />
-        <NewDogForm updateDogs={updateDogs} />
         </div>
     )
 };

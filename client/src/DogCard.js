@@ -11,16 +11,17 @@ function DogCard({ dog, updateDogs }) {
     const {setError} = useContext(ErrorContext);
     
 
-    function handleClick() {
+    function handleClick(e) {
+        e.preventDefault();
         if (adopted === false) {
-        fetch(`/dogs/${id}`, {
+        fetch(`/dogs/${id}/adopt`, {
             method: "PATCH",
             headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
             adopted: !adopted,
-            user_id: user.id,
+            user_id: user.id
         }),
     })
     .then(r => {
@@ -84,7 +85,11 @@ function DogCard({ dog, updateDogs }) {
         <img src={`${image}`} alt={`a cute photo of ${name}`}></img>
         {user ? <button className="button" onClick={handleClick}>{adopted ? "Give back to shelter?" : (`Adopt ${name}!`)}</button> : null}
         {(user && (userId === user.id)) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
-        {(user && user.name.toLowerCase() === "hillary") ? <button className="button" onClick={() => handleDelete(id)}>Delete Dog</button> : null}
+        {(user && user.name.toLowerCase() === "hillary") ? (
+        <div>
+            <button className="button" onClick={() => handleDelete(id)}>Delete Dog</button> 
+            <Link className="App-link" to={`/dogs/${id}/edit`}>Edit Dog</Link>
+            </div>) : null}
         </div>
     )
 };

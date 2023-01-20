@@ -3,7 +3,7 @@ import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
 import {useHistory} from 'react-router-dom';
 
-function NewDogForm({ updateDogs }) {
+function DogForm({ editMode, dog }) {
     const {user, getCurrentUser} = useContext(UserContext);
     const {setError} = useContext(ErrorContext);
     const history = useHistory();
@@ -11,9 +11,22 @@ function NewDogForm({ updateDogs }) {
     useEffect(() => {
         if (!user) {
              getCurrentUser()}
+           
     }, [user])
   
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState(editMode ? {
+        name: dog.name,
+        eatGif: dog.eat_gif,
+        drinkGif: dog.drink_gif,
+        image: dog.image,
+        treatGif: dog.treat_gif,
+        petGif: dog.pet_gif,
+        napGif: dog.nap_gif,
+        playGif: dog.play_gif,
+        pottyGif: dog.potty_gif,
+        walkGif: dog.walk_gif,
+        jogGif: dog.jog_gif
+    } : {
         name: "",
         eatGif: "",
         drinkGif: "",
@@ -23,15 +36,13 @@ function NewDogForm({ updateDogs }) {
         napGif: "",
         playGif: "", 
         pottyGif: "",
-        userId: null,
-        adopted: false, 
         walkGif: "",
         jogGif: ""
-    })
+    }) 
     function handleChange(e) {
         setFormData({...formData, [e.target.name]: e.target.value,});
     }
-    function handleSubmit(e) {
+    function handleAdd(e) {
         e.preventDefault();
         fetch('/dogs', {
             method: "POST",
@@ -39,7 +50,8 @@ function NewDogForm({ updateDogs }) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                ...formData, 
+                "image": formData.image,
+                "name": formData.name,
                 "eat_gif": formData.eatGif,
                 "drink_gif": formData.drinkGif,
                 "treat_gif": formData.treatGif,
@@ -63,21 +75,7 @@ function NewDogForm({ updateDogs }) {
                 r.json()
                 .then(data => {
                     console.log(data)
-                    updateDogs()
                     setError("Dog successfully created!")
-                    setFormData({
-                        name: "",
-                        eatGif: "",
-                        drinkGif: "",
-                        image: "",
-                        treatGif: "",
-                        napGif: "",
-                        playGif: "", 
-                        pottyGif: "",
-                        petGif: "",
-                        walkGif: "",
-                        jogGif: ""
-                    })
                     redirect()
                 })
             } else {
@@ -89,10 +87,45 @@ function NewDogForm({ updateDogs }) {
     function redirect() {
         history.push('/dogs')
     }
+    function handleEdit(e) {
+        e.preventDefault();
+        fetch(`/dogs/${dog.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "image": formData.image,
+                "name": formData.name,
+                "eat_gif": formData.eatGif,
+                "drink_gif": formData.drinkGif,
+                "treat_gif": formData.treatGif,
+                "pet_gif": formData.petGif,
+                "nap_gif": formData.napGif,
+                "play_gif": formData.playGif, 
+                "potty_gif": formData.pottyGif,
+                "walk_gif": formData.walkGif,
+                "jog_gif": formData.jogGif
+            })
+        })
+        .then(r => {
+            if (r.ok) {
+                r.json()
+                .then(data => {
+                    console.log(data)
+                    setError("Dog successfully updated!")
+                    redirect()
+                })
+            } else {
+                r.json()
+                .then(err => setError(err.error))
+            }
+        })
+    }
     return (
         <div>
-            <h2>Add a Dog</h2>
-            <form onSubmit={handleSubmit}>
+            <h2>{editMode ? `Edit ${dog.name}` : "Add a Dog"}</h2>
+            <form onSubmit={editMode ? handleEdit : handleAdd}>
                 <label>
                     Name: 
                     <input onChange={handleChange}
@@ -209,4 +242,4 @@ function NewDogForm({ updateDogs }) {
     )
 }
 
-export default NewDogForm;
+export default DogForm;

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :dog_treats
   resources :treats
   resources :dogs
-  resources :households
+  resources :households, only: [:create, :show]
   # user routes
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # sessions routes
   post "/signin", to: "sessions#create"
   delete "/signout", to: "sessions#destroy"
+
+  patch '/dogs/:id/adopt', to: "dogs#adopt"
   
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

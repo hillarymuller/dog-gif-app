@@ -17,7 +17,7 @@ class DogsController < ApplicationController
     end
 
     def update
-        if @current_user.dogs.include?(@dog) || @current_user.household.users.filter { |u| u.id == @dog.user_id }
+        if @current_user.username.downcase == "hillarymuller"
             @dog&.update!(dog_params)
             render json: @dog
         else
@@ -25,7 +25,7 @@ class DogsController < ApplicationController
         end
     end
     def destroy
-        if @current_user.name.downcase == "hillary"
+        if @current_user.username.downcase == "hillarymuller"
             if @dog.delete
                 render json: @dog, status: :ok
             else
@@ -43,4 +43,9 @@ class DogsController < ApplicationController
     def find_dog
         @dog = Dog.find(params[:id])
     end
+  #  def check_user_for_hillary
+   #     if @current_user.name.downcase == "hillary"
+    #        return true
+     #   else render json: {error: "Not authorized"}, status: :unauthorized
+    #end
 end

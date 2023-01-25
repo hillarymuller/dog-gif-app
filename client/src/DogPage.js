@@ -8,7 +8,7 @@ function DogPage() {
     const {setError} = useContext(ErrorContext);
     const [dog, setDog] = useState("");
     const [loading, setLoading] = useState(true);
-    const {name, image, hunger, thirst, potty, energy, happiness, id} = dog;
+    const {name, image, hunger, thirst, potty, energy, happiness, id, treats} = dog;
     const [display, setDisplay] = useState(null);
     const {user} = useContext(UserContext);
 
@@ -254,10 +254,12 @@ function DogPage() {
     function updateDog(updatedDog) {
         setDog(updatedDog);
     }
+  
     if (!user) {
         setError("Not authorized")
         return (<Redirect to='/signin' />)
     }
+    
     if (loading) return <h2>Loading Dog...</h2>
     return (
         <div className="card">
@@ -273,11 +275,14 @@ function DogPage() {
         <button className="button" onClick={handlePotty}>Potty time</button>
         <button className="button" onClick={handleWalk}>Walk me</button>
         <button className="button" onClick={handleNap}>Nap time</button>
-        <button className="button" onClick={handleTreat}>Treat me</button>
+        
         <button className="button" onClick={handlePet}>Pet me</button>
         <button className="button" onClick={handleJog}>Jog together</button>
         <button className="button" onClick={handleWater}>Give me water</button>
         <button className="button" onClick={handlePlay}>Play with me</button>
+       
+        <button className="button" onClick={handleTreat}>Treat me</button>
+       
         </div>
     )
 }

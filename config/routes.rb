@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post "/signin", to: "sessions#create"
   delete "/signout", to: "sessions#destroy"
 
-  patch '/dogs/:id/adopt', to: "dogs#adopt"
+  patch '/dogs/:dogId/edit', to: "dogs#adminedit"
   
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

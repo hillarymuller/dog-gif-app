@@ -89,7 +89,7 @@ function DogForm({ editMode, dog }) {
     }
     function handleEdit(e) {
         e.preventDefault();
-        fetch(`/dogs/${dog.id}`, {
+        fetch(`/dogs/${dog.id}/edit`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"

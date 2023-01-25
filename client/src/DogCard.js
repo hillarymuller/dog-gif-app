@@ -6,15 +6,16 @@ import { Link } from 'react-router-dom';
 
 function DogCard({ dog, updateDogs }) {
     const [currentDog, setCurrentDog] = useState(dog);
-    const {adopted, name, image, id, user_id: userId} = currentDog;
+    const {adopted, name, image, id, user_id: userId } = currentDog;
     const {user} = useContext(UserContext);
     const {setError} = useContext(ErrorContext);
+    
     
 
     function handleClick(e) {
         e.preventDefault();
         if (adopted === false) {
-        fetch(`/dogs/${id}/adopt`, {
+        fetch(`/dogs/${id}`, {
             method: "PATCH",
             headers: {
             "Content-Type": "application/json"
@@ -84,7 +85,7 @@ function DogCard({ dog, updateDogs }) {
         <h1>{name}</h1>
         <img src={`${image}`} alt={`a cute photo of ${name}`}></img>
         {user ? <button className="button" onClick={handleClick}>{adopted ? "Give back to shelter?" : (`Adopt ${name}!`)}</button> : null}
-        {(user && (userId === user.id)) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
+        {(user && user.id === userId) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
         {(user && user.name.toLowerCase() === "hillary") ? (
         <div>
             <button className="button" onClick={() => handleDelete(id)}>Delete Dog</button> 

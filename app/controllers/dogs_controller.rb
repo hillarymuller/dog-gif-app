@@ -16,7 +16,7 @@ class DogsController < ApplicationController
         render json: dog, status: :created
     end
 
-    def update
+    def adminedit
         if @current_user.username.downcase == "hillarymuller"
             @dog&.update!(dog_params)
             render json: @dog
@@ -25,7 +25,7 @@ class DogsController < ApplicationController
         end
     end
 
-    def adopt
+    def update
         @dog&.update!(dog_params)
         render json: @dog
     end

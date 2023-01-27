@@ -2,25 +2,10 @@ import React, {useState, useEffect} from 'react';
 import DogsList from './DogsList';
 
 
-function DogsContainer() {
-    const [dogs, setDogs] = useState([]);
-    
+function DogsContainer({ dogs, fetchDogs}) {
 
-    const fetchDogs = async () => {
-        try {
-            const resp = await fetch('/dogs');
-            const data = await resp.json();
-            setDogs(data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    useEffect(() => {
-        fetchDogs();
-        console.log(dogs);
-    }, []);
-    
-    function updateDogs(data) {
+
+    function updateDogs() {
         fetchDogs();
     }
     return (

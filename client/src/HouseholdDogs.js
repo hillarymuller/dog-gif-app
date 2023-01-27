@@ -10,7 +10,7 @@ function HouseholdDogs() {
     const [loading, setLoading] = useState(true);
     const {setError} = useContext(ErrorContext);
     const {user, getCurrentUser} = useContext(UserContext);
-    const [householdName, setHouseholdName] = useState(null);
+    const [householdName, setHouseholdName] = useState("");
   
     function fetchDogs() {
         (user ? (

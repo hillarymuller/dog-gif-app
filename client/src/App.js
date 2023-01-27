@@ -17,15 +17,53 @@ import DogForm from './DogForm';
 import EditDog from './EditDog';
 
 function App() {
-  const { getCurrentUser, user } = useContext(UserContext);
-  const [loading, setLoading] = useState(true);
+ 
+const {user, getCurrentUser} = useContext(UserContext);
   const {setError} = useContext(ErrorContext);
+  const [dogs, setDogs] = useState([]);
+    
+
+  const fetchDogs = async () => {
+      try {
+          const resp = await fetch('/dogs');
+          const data = await resp.json();
+          setDogs(data);
+      } catch (error) {
+          console.log(error);
+      }
+  }
+
+  function updateEveryHour() {
+    
+      dogs.map(dog => {
+          fetch(`/dogs/${dog.id}`, {
+              method: "PATCH",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                  hunger: dog.hunger < 10 ? dog.hunger + 1 : 10,
+                  thirst: dog.thirst < 10 ? dog.hunger + 1 : 10,
+                  potty: dog.potty < 9 ? dog.hunger + 2 : 10
+              })
+          }).then(r => {
+              if (r.ok) {
+                  console.log(r)
+                  fetchDogs()
+              } else {
+                  r.json()
+                  .then(err => console.log(err))
+              }
+          })
+      })
+  }
 
   useEffect(() => {
-    getCurrentUser();
-    if (user) {
-      setLoading(false)
-    }
+      fetchDogs();
+      getCurrentUser();
+    let interval = setInterval(() => {
+        updateEveryHour()
+    }, 600000);
   }, []);
 
 
@@ -50,14 +88,14 @@ function App() {
         </Route>
         
         <Route path="/users/:userId">
-          <UserDogs user={user}/>
+          <UserDogs fetchDogs={fetchDogs} dogs={dogs}/>
         </Route>
         <Route path="/households/:householdId">
-          <HouseholdDogs loading={loading} setLoading={setLoading} user={user}/>
+          <HouseholdDogs />
         </Route>
       
         <Route path="/dogs">
-          <DogsContainer user={user}/>
+          <DogsContainer dogs={dogs} fetchDogs={fetchDogs} />
         </Route>
         <Route path="/signin">
           <SigninForm />

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
 import { Link } from 'react-router-dom';
@@ -7,9 +7,14 @@ import { Link } from 'react-router-dom';
 function DogCard({ dog, updateDogs }) {
     const [currentDog, setCurrentDog] = useState(dog);
     const {adopted, name, image, id, user_id: userId } = currentDog;
-    const {user} = useContext(UserContext);
+    const {user, getCurrentUser} = useContext(UserContext);
     const {setError} = useContext(ErrorContext);
     
+    useEffect(() => {
+        if (!user) {
+            getCurrentUser();
+        }
+    }, [user])
     
 
     function handleClick(e) {
@@ -85,7 +90,7 @@ function DogCard({ dog, updateDogs }) {
         <h1>{name}</h1>
         <img src={`${image}`} alt={`a cute photo of ${name}`}></img>
         {user ? <button className="button" onClick={handleClick}>{adopted ? "Give back to shelter?" : (`Adopt ${name}!`)}</button> : null}
-        {(user && user.id === userId) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
+        {(user && user.household.users.filter(user => user.id === userId)) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
         {(user && user.name.toLowerCase() === "hillary") ? (
         <div>
             <button className="button" onClick={() => handleDelete(id)}>Delete Dog</button> 

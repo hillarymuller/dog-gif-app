@@ -1,32 +1,46 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {useParams, Redirect} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import {ErrorContext} from './context/error';
 import {UserContext} from './context/user';
+
 
 function DogPage() {
     const {dogId} = useParams();
     const {setError} = useContext(ErrorContext);
     const [dog, setDog] = useState("");
     const [loading, setLoading] = useState(true);
-    const {name, image, hunger, thirst, potty, energy, happiness, id, treats} = dog;
+    const {name, image, hunger, thirst, potty, energy, happiness, id, treats = []} = dog;
     const [display, setDisplay] = useState(null);
-    const {user} = useContext(UserContext);
+    const {user, getCurrentUser} = useContext(UserContext);
+    const history = useHistory();
+    const [currentTreat, setCurrentTreat] = useState("");
 
     
-
-   const fetchDog = async () => {
-        try {
-            const r = await fetch(`/dogs/${dogId}`)
-            const data = await r.json();
-                setDog(data)
-                setLoading(false)
-                } catch (err) {
-                    setError(err.error)
-            }
+function redirect() {
+    history.push('/signin')
+}
+   const fetchDog = () => {
+        fetch(`/dogs/${dogId}`)
+        .then(r => {
+            if (r.ok) {
+                r.json()
+                .then(data => {
+                    setDog(data)
+                    setLoading(false)
+            })
+        } else {
+            r.json()
+            .then(err => {
+                setError(err.error)
+                redirect()
+            })
         }
+         })
+    }
 
     useEffect(() => {
         fetchDog();
+    
     }, [dogId])
 
     function handleFeed(){
@@ -131,7 +145,12 @@ function DogPage() {
             }
         })
     }
-    function handleTreat(){
+    function handleTreat(e){
+        e.preventDefault()
+        if (currentTreat === "") {
+            alert("Please choose a treat")
+        } else {
+           
         fetch(`/dogs/${id}`, {
             method: "PATCH",
             headers: {
@@ -147,13 +166,14 @@ function DogPage() {
                 .then(data => {
                     updateDog(data)
                     setDisplay(data.treat_gif)
+                    alert(`${data.name} loved the ${currentTreat}!!!!`)
                 })
             } else {
                 r.json()
                 .then(err => setError(err.error))
             }
         })
-    }
+    }}
     function handlePet(){
         fetch(`/dogs/${id}`, {
             method: "PATCH",
@@ -254,12 +274,14 @@ function DogPage() {
     function updateDog(updatedDog) {
         setDog(updatedDog);
     }
-  
-    if (!user) {
-        setError("Not authorized")
-        return (<Redirect to='/signin' />)
-    }
-    
+  function handleChange(e) {
+    setCurrentTreat(e.target.value)
+    console.log(currentTreat)
+  }
+   if (!user) {
+    getCurrentUser();
+
+   }
     if (loading) return <h2>Loading Dog...</h2>
     return (
         <div className="card">
@@ -281,8 +303,17 @@ function DogPage() {
         <button className="button" onClick={handleWater}>Give me water</button>
         <button className="button" onClick={handlePlay}>Play with me</button>
        
-        <button className="button" onClick={handleTreat}>Treat me</button>
-       
+        <form onSubmit={handleTreat}>
+            <label>
+                    <select value={currentTreat}
+                    onChange={handleChange}
+                    name="treat">
+                        <option value="">Please choose a treat</option>
+                        {treats.map(treat => <option value={treat.name} key={treat.id}>{treat.name}</option>)}
+                    </select>
+            </label>
+            <button className="button" type="submit">Treat me!</button>
+                   </form> 
         </div>
     )
 }

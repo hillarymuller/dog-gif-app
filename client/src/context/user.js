@@ -1,6 +1,7 @@
 import React, { useState, useContext, useCallback } from 'react';
 import {ErrorContext} from './error';
 
+
 const UserContext = React.createContext()
 
 function UserProvider({ children }) {
@@ -19,6 +20,7 @@ function UserProvider({ children }) {
                 }
         } catch (error) {
             setError(error.error)
+            
         }
     }, [setError])
 

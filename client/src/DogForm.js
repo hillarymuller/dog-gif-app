@@ -1,6 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
+import {Link} from 'react-router-dom';
 
 
 function DogForm({ editMode, dog }) {
@@ -122,6 +123,7 @@ function DogForm({ editMode, dog }) {
     return (
         <div>
             <h2>{editMode ? `Edit ${dog.name}` : "Add a Dog"}</h2>
+            <span>Give your dog a name, then upload gifs of your dog to <a href="https://giphy.com/" target="blank">giphy.com</a> & copy/paste the links below!</span>
             <form onSubmit={editMode ? handleEdit : handleAdd}>
                 <label>
                     Name: 

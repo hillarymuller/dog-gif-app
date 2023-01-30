@@ -13,9 +13,10 @@ function DogCard({ dog, updateDogs }) {
     useEffect(() => {
         if (!user) {
             getCurrentUser();
+            
         }
     }, [user])
-    
+  
 
     function handleClick(e) {
         e.preventDefault();
@@ -68,7 +69,7 @@ function DogCard({ dog, updateDogs }) {
         <h1>{name}</h1>
         <img src={`${image}`} alt={`a cute photo of ${name}`}></img>
         {user && (adopted === false) ? <button className="button" onClick={handleClick}>{(`Adopt ${name}!`)}</button> : null}
-        {(user && user.household.users.filter(user => user.id === currentDog.userId)) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
+        {(user && user.household.dogs.find(dog => dog.id === currentDog.id)) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
         {(user && user.username.toLowerCase() === "hillarymuller") ? (
         <div>
             <button className="button" onClick={() => handleDelete(id)}>Delete Dog</button> 

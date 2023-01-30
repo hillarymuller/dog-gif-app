@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import {ErrorContext} from './context/error';
 import {UserContext} from './context/user';
 import NewHouseholdForm from './NewHouseholdForm';
-import {useHistory} from 'react-router-dom';
+
 
 
 
@@ -18,7 +18,7 @@ function SignupForm() {
     const {setError} = useContext(ErrorContext);
     const {signup} = useContext(UserContext);
     const [households, setHouseholds] = useState([]);
-    const history = useHistory();
+
   
     const fetchHouseholds = async () => {
         try {
@@ -43,7 +43,6 @@ function SignupForm() {
         const success = signup({...formData, password_confirmation: formData.passwordConfirmation, household_id: formData.householdId});
         if (success) {
             setError("Successfully signed up!")
-            history.push('/signin')
         }
     }
     

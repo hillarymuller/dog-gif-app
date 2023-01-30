@@ -68,6 +68,8 @@ function HouseholdDogs() {
     return (
         <div>
         <h1>{user ? `${user.household.name}` : "Household"} Dogs</h1>
+        {loading ? "Dogs Loading..." : null}
+        <DogsList dogs={dogs} updateDogs={updateDogs} />
         <form onSubmit={handleSubmit}>
             <label>
                 Edit Household Name:
@@ -79,8 +81,6 @@ function HouseholdDogs() {
             </label>
             <button className="button" type="submit">Submit</button>
             </form>
-        {loading ? "Dogs Loading..." : null}
-        <DogsList dogs={dogs} updateDogs={updateDogs} />
         </div>
     )
 };

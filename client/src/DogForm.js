@@ -1,12 +1,12 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
-import {useHistory} from 'react-router-dom';
+
 
 function DogForm({ editMode, dog }) {
     const {user, getCurrentUser} = useContext(UserContext);
     const {setError} = useContext(ErrorContext);
-    const history = useHistory();
+
  
     useEffect(() => {
         if (!user) {
@@ -75,8 +75,8 @@ function DogForm({ editMode, dog }) {
                 r.json()
                 .then(data => {
                     console.log(data)
-                    setError("Dog successfully created!")
-                    redirect()
+                    setError(`${data.name} successfully created!`)
+                    
                 })
             } else {
                 r.json()
@@ -84,9 +84,7 @@ function DogForm({ editMode, dog }) {
             }
         })
     }
-    function redirect() {
-        history.push('/dogs')
-    }
+ 
     function handleEdit(e) {
         e.preventDefault();
         fetch(`/dogs/${dog.id}/edit`, {
@@ -113,8 +111,7 @@ function DogForm({ editMode, dog }) {
                 r.json()
                 .then(data => {
                     console.log(data)
-                    setError("Dog successfully updated!")
-                    redirect()
+                    setError(`${data.name} successfully updated!`)
                 })
             } else {
                 r.json()

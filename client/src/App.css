@@ -16,6 +16,7 @@
 
 .App-link {
   color: #191970;
+  font-size: calc(5px + 2vmin);
 }
 
 

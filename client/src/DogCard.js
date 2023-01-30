@@ -46,32 +46,10 @@ function DogCard({ dog, updateDogs }) {
         } 
     });
 } else {
-    fetch(`/dogs/${id}`, {
-        method: "PATCH",
-        headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        adopted: !adopted,
-        user_id: null,
-    }),
-})
-.then(r => {
-    if (r.ok) {
-        r.json()
-        .then(data => {
-            console.log(data);
-            setCurrentDog(data);
-            updateDogs()
-        })
-
-    } else {
-        r.json()
-        .then(err => setError(err.error))
-    } 
-});
+    alert(`${currentDog.name} has already been adopted!`)
+};
 }
-    }
+    
     function handleDelete(id) {
         fetch(`/dogs/${id}`, {
             method: "DELETE"
@@ -89,9 +67,9 @@ function DogCard({ dog, updateDogs }) {
         <div className="card">
         <h1>{name}</h1>
         <img src={`${image}`} alt={`a cute photo of ${name}`}></img>
-        {user ? <button className="button" onClick={handleClick}>{adopted ? "Give back to shelter?" : (`Adopt ${name}!`)}</button> : null}
-        {(user && user.household.users.filter(user => user.id === userId)) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
-        {(user && user.name.toLowerCase() === "hillary") ? (
+        {user && (adopted === false) ? <button className="button" onClick={handleClick}>{(`Adopt ${name}!`)}</button> : null}
+        {(user && user.household.users.filter(user => user.id === currentDog.userId)) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
+        {(user && user.username.toLowerCase() === "hillarymuller") ? (
         <div>
             <button className="button" onClick={() => handleDelete(id)}>Delete Dog</button> 
             <Link className="App-link" to={`/dogs/${id}/edit`}>Edit Dog</Link>

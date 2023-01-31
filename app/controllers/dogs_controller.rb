@@ -28,11 +28,6 @@ class DogsController < ApplicationController
     def update
        
         @dog&.update!(dog_params)
-            if @dog.adopted
-              if @dog.hunger == 10 || self.thirst == 10 || self.potty == 10 
-                NotifierMailer.with(dog: @dog).dog_needs_attention.deliver_now
-              end
-            end
         render json: @dog
     end
 

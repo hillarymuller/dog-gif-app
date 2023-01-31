@@ -33,40 +33,15 @@ const {user, getCurrentUser} = useContext(UserContext);
       }
   }
 
-  function updateEveryHour() {
-    
-      dogs.map(dog => {
-          fetch(`/dogs/${dog.id}`, {
-              method: "PATCH",
-              headers: {
-                  "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                  hunger: dog.hunger < 10 ? dog.hunger + 1 : 10,
-                  thirst: dog.thirst < 10 ? dog.hunger + 1 : 10,
-                  potty: dog.potty < 9 ? dog.hunger + 2 : 10
-              })
-          }).then(r => {
-              if (r.ok) {
-                  console.log(r)
-                  fetchDogs()
-              } else {
-                  r.json()
-                  .then(err => console.log(err))
-              }
-          })
-      })
-  }
+
 
   useEffect(() => {
       fetchDogs();
       getCurrentUser();
-    let interval = setInterval(() => {
-        updateEveryHour()
-    }, 600000);
+ 
   }, []);
 
-
+  const userDogs = dogs.map(dog => dog.user === user)
   return (
     <div className="App">
       <Router>
@@ -88,7 +63,7 @@ const {user, getCurrentUser} = useContext(UserContext);
         </Route>
         
         <Route path="/users/:userId">
-          <UserDogs fetchDogs={fetchDogs} dogs={dogs}/>
+          <UserDogs fetchDogs={fetchDogs} dogs={userDogs}/>
         </Route>
         <Route path="/households/:householdId">
           <HouseholdDogs />

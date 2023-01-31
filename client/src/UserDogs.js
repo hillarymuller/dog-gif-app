@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext} from 'react';
 import {UserContext} from './context/user';
 import DogsList from './DogsList';
 
-function UserDogs({ fetchDogs }) {
+function UserDogs({ fetchDogs, dogs }) {
     const {user, getCurrentUser} = useContext(UserContext);
     const [userDogs, setUserDogs] = useState([]);
 
@@ -10,6 +10,7 @@ function UserDogs({ fetchDogs }) {
     useEffect(() => {
         if (!user) {
             getCurrentUser();
+            setUserDogs(dogs)
         } else {
             setUserDogs(user.dogs)
         }

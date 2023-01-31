@@ -14,8 +14,10 @@ class Dog < ApplicationRecord
     self.name = self.name.upcase
   end
   def needs_attention
-    if self.hunger = 10
-      NotifierMailer.dog_needs_attention(self).deliver_now
+    if self.user
+      if self.hunger = 10
+        NotifierMailer.dog_needs_attention(self).deliver_now
+      end
     end
   end
 end

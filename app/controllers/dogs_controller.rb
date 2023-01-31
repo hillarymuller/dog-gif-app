@@ -26,8 +26,13 @@ class DogsController < ApplicationController
     end
 
     def update
-        treats = Treat.all
-        @dog&.update!(dog_params, treats: treats)
+       
+        @dog&.update!(dog_params)
+            if @dog.adopted
+              if @dog.hunger == 10 || self.thirst == 10 || self.potty == 10 
+                NotifierMailer.with(dog: @dog).dog_needs_attention.deliver_now
+              end
+            end
         render json: @dog
     end
 
@@ -46,7 +51,7 @@ class DogsController < ApplicationController
  
     private
     def dog_params
-        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty, :adopted, :eat_gif, :drink_gif, :potty_gif, :play_gif, :treat_gif, :nap_gif, :walk_gif, :jog_gif, :pet_gif, :image, :name, :treats)
+        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty, :adopted, :eat_gif, :drink_gif, :potty_gif, :play_gif, :treat_gif, :nap_gif, :walk_gif, :jog_gif, :pet_gif, :image, :name)
     end
     def find_dog
         @dog = Dog.find(params[:id])

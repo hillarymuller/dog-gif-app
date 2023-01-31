@@ -35,12 +35,10 @@ function DogCard({ dog, updateDogs }) {
         if (r.ok) {
             r.json()
             .then(data => {
-                console.log(data)
                 setCurrentDog(data)
-                updateDogs()
-                setError(`Successfully adopted ${data.name}`)
+                getCurrentUser()
             })
-
+            setError(`Successfully adopted ${currentDog.name}`)
         } else {
             r.json()
             .then(err => setError(err.error))

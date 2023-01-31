@@ -1,19 +1,24 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {UserContext} from './context/user';
 import DogsList from './DogsList';
+import {ErrorContext} from './context/error';
 
-function UserDogs({ fetchDogs, dogs }) {
+function UserDogs() {
     const {user, getCurrentUser} = useContext(UserContext);
-    const [userDogs, setUserDogs] = useState([]);
+    const [dogs, setDogs] = useState([]);
+    const {setError} = useContext(ErrorContext);
 
-   
+   const fetchDogs = async () => {
+    try {
+        const resp = await fetch('/me');
+        const data = await resp.json();
+        setDogs(data.dogs);
+    } catch (error) {
+        setError(error)
+    }
+   }
     useEffect(() => {
-        if (!user) {
-            getCurrentUser();
-            setUserDogs(dogs)
-        } else {
-            setUserDogs(user.dogs)
-        }
+        fetchDogs();
     }, [user])
 
     function updateDogs() {
@@ -23,7 +28,7 @@ function UserDogs({ fetchDogs, dogs }) {
     return (
         <div>
         <h1>My Dogs</h1>
-        <DogsList dogs={userDogs} updateDogs={updateDogs} />
+        <DogsList dogs={dogs} updateDogs={updateDogs} />
         </div>
     )
 };

@@ -6,7 +6,7 @@ import SignupForm from './SignupForm';
 import SigninForm from './SigninForm';
 import DogsContainer from './DogsContainer';
 import NotFound from './NotFound';
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import HouseholdDogs from './HouseholdDogs';
 import UserDogs from './UserDogs';
 import {UserContext} from './context/user';
@@ -20,28 +20,16 @@ function App() {
  
 const {user, getCurrentUser} = useContext(UserContext);
   const {setError} = useContext(ErrorContext);
-  const [dogs, setDogs] = useState([]);
-    
 
-  const fetchDogs = async () => {
-      try {
-          const resp = await fetch('/dogs');
-          const data = await resp.json();
-          setDogs(data);
-      } catch (error) {
-          console.log(error);
-      }
-  }
 
 
 
   useEffect(() => {
-      fetchDogs();
       getCurrentUser();
  
   }, []);
 
-  const userDogs = dogs.map(dog => dog.user === user)
+ 
   return (
     <div className="App">
       <Router>
@@ -63,14 +51,14 @@ const {user, getCurrentUser} = useContext(UserContext);
         </Route>
         
         <Route path="/users/:userId">
-          <UserDogs fetchDogs={fetchDogs} dogs={userDogs}/>
+          <UserDogs />
         </Route>
         <Route path="/households/:householdId">
           <HouseholdDogs />
         </Route>
       
         <Route path="/dogs">
-          <DogsContainer dogs={dogs} fetchDogs={fetchDogs} />
+          <DogsContainer  />
         </Route>
         <Route path="/signin">
           <SigninForm />

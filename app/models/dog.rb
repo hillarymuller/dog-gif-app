@@ -2,7 +2,8 @@ class Dog < ApplicationRecord
   belongs_to :user, optional: true
   has_many :dog_treats
   has_many :treats, through: :dog_treats
-  before_save :format_name, :needs_attention
+  before_save :format_name
+  after_save :needs_attention
   
 
   validates :hunger, :thirst, :energy, :potty, :happiness, numericality: {in: 0..10}

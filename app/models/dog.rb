@@ -13,4 +13,9 @@ class Dog < ApplicationRecord
   def format_name
     self.name = self.name.upcase
   end
+  def needs_attention
+    if self.hunger = 10
+      NotifierMailer.dog_needs_attention(self).deliver_now
+    end
+  end
 end

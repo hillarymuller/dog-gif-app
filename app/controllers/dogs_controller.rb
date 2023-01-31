@@ -26,7 +26,8 @@ class DogsController < ApplicationController
     end
 
     def update
-        @dog&.update!(dog_params)
+        treats = Treat.all
+        @dog&.update!(dog_params, treats: treats)
         render json: @dog
     end
 
@@ -41,10 +42,11 @@ class DogsController < ApplicationController
             render json: {error: "Not authorized"}, status: :unauthorized
         end
     end
-  
+
+ 
     private
     def dog_params
-        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty, :adopted, :eat_gif, :drink_gif, :potty_gif, :play_gif, :treat_gif, :nap_gif, :walk_gif, :jog_gif, :pet_gif, :image, :name)
+        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty, :adopted, :eat_gif, :drink_gif, :potty_gif, :play_gif, :treat_gif, :nap_gif, :walk_gif, :jog_gif, :pet_gif, :image, :name, :treats)
     end
     def find_dog
         @dog = Dog.find(params[:id])

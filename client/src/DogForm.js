@@ -1,20 +1,16 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {UserContext} from './context/user';
 import {ErrorContext} from './context/error';
-import {Link} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
 
 
 function DogForm({ editMode, dog }) {
     const {user, getCurrentUser} = useContext(UserContext);
+    const history = useHistory();
     const {setError} = useContext(ErrorContext);
-
- 
-    useEffect(() => {
-        if (!user) {
-             getCurrentUser()}
-           
-    }, [user])
-  
+    const [dogTreats, setDogTreats] = useState([]);
+    const [treatChoices, setTreatChoices] = useState([]);
     const [formData, setFormData] = useState(editMode ? {
         name: dog.name,
         eatGif: dog.eat_gif,
@@ -26,7 +22,8 @@ function DogForm({ editMode, dog }) {
         playGif: dog.play_gif,
         pottyGif: dog.potty_gif,
         walkGif: dog.walk_gif,
-        jogGif: dog.jog_gif
+        jogGif: dog.jog_gif, 
+        treatIds: treatChoices
     } : {
         name: "",
         eatGif: "",
@@ -38,8 +35,39 @@ function DogForm({ editMode, dog }) {
         playGif: "", 
         pottyGif: "",
         walkGif: "",
-        jogGif: ""
+        jogGif: "",
+        treatIds: treatChoices
     }) 
+    
+
+ 
+    useEffect(() => {
+        if (editMode) {
+            setTreatChoices(dog.treats.map(t => t.id
+            ))
+            setFormData({...formData, treatIds: treatChoices})
+        }
+        fetch('/treats')
+        .then(r => {
+            if (r.ok) {
+                r.json()
+                .then(data =>
+                    setDogTreats(data))
+            }
+            else {
+                r.json()
+                .then(err => setError(err.error))
+            }
+        })
+        if (!user) {
+             getCurrentUser()}
+    
+    
+           
+    }, [user])
+  
+  
+    console.log(formData)
     function handleChange(e) {
         setFormData({...formData, [e.target.name]: e.target.value,});
     }
@@ -69,6 +97,8 @@ function DogForm({ editMode, dog }) {
                 "energy": 10,
                 "happiness": 0,
                 "potty": 10,
+                "treat_ids": formData.treatIds
+
             })
         })
         .then(r => {
@@ -77,7 +107,7 @@ function DogForm({ editMode, dog }) {
                 .then(data => {
                     console.log(data)
                     setError(`${data.name} successfully created!`)
-                    
+                    redirect()
                 })
             } else {
                 r.json()
@@ -88,6 +118,7 @@ function DogForm({ editMode, dog }) {
  
     function handleEdit(e) {
         e.preventDefault();
+        console.log(e)
         fetch(`/dogs/${dog.id}/edit`, {
             method: "PATCH",
             headers: {
@@ -104,7 +135,8 @@ function DogForm({ editMode, dog }) {
                 "play_gif": formData.playGif, 
                 "potty_gif": formData.pottyGif,
                 "walk_gif": formData.walkGif,
-                "jog_gif": formData.jogGif
+                "jog_gif": formData.jogGif,
+                "treat_ids": formData.treatIds
             })
         })
         .then(r => {
@@ -113,12 +145,33 @@ function DogForm({ editMode, dog }) {
                 .then(data => {
                     console.log(data)
                     setError(`${data.name} successfully updated!`)
+                    redirect()
                 })
             } else {
                 r.json()
                 .then(err => setError(err.error))
             }
         })
+    }
+    function handleCheck(e){
+        const checked = e.target.checked
+        console.log(checked)
+        if(checked == true) {
+            const addedTreat = parseInt(e.target.value)
+            setTreatChoices([...treatChoices, addedTreat]);
+            setFormData({...formData, treatIds: [...treatChoices, addedTreat]})
+            console.log(treatChoices)
+            console.log(formData.treatIds)
+        } else {
+            const filteredChoices = treatChoices.filter(t => t !== parseInt(e.target.value));
+            console.log(filteredChoices)
+            setTreatChoices(filteredChoices)
+            setFormData({...formData, treatIds: filteredChoices})
+            console.log(treatChoices)
+        }
+    }
+    function redirect() {
+        history.push('/dogs')
     }
     return (
         <div>
@@ -235,6 +288,22 @@ function DogForm({ editMode, dog }) {
                 </label>
                 <br></br>
                 <br></br>
+                <label>
+                    Favorite treats:
+                    {dogTreats.map(treat => {
+                        return (
+                            <li key={treat.id}>{treat.name}
+                                <input
+                                type="checkbox"
+                                name={treat.name}
+                                value={treat.id}
+                                defaultChecked={editMode ? dog.treats.find(t => t.id === treat.id) ? true : false : false}
+                                onChange={handleCheck}
+                                />
+                            </li>
+                        )
+                    })}
+                </label>
                 <button className="button" type="submit">Submit</button>
             </form>
         </div>

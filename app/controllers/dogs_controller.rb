@@ -13,12 +13,14 @@ class DogsController < ApplicationController
 
     def create
         dog = Dog.create!(dog_params)
+        dog.treats = Treat.where(id: params[:treat_ids])
         render json: dog, status: :created
     end
 
     def adminedit
         if @current_user.username.downcase == "hillarymuller"
             @dog&.update!(dog_params)
+            @dog.treats = Treat.where(id: params[:treat_ids])
             render json: @dog
         else
             render json: { error: "Not authorized" }, status: :unauthorized
@@ -46,7 +48,7 @@ class DogsController < ApplicationController
  
     private
     def dog_params
-        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty, :adopted, :eat_gif, :drink_gif, :potty_gif, :play_gif, :treat_gif, :nap_gif, :walk_gif, :jog_gif, :pet_gif, :image, :name)
+        params.permit(:id, :user_id, :hunger, :thirst, :happiness, :energy, :potty, :adopted, :eat_gif, :drink_gif, :potty_gif, :play_gif, :treat_gif, :nap_gif, :walk_gif, :jog_gif, :pet_gif, :image, :name, :treat_ids)
     end
     def find_dog
         @dog = Dog.find(params[:id])

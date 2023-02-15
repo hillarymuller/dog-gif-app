@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Treat.create([{name: "pup pop"}, {name: "peanut butter"}, {name: "sweet potato"}, 
+Treat.create!([{name: "pup pop"}, {name: "peanut butter"}, {name: "sweet potato"}, 
 {name: "cheese"}, {name: "marshmallow"}, {name: "salmon jerky"}])
 # 10 Charlies test
-Dog.create([{
+Dog.create!([{
     name: "BRISCOE", 
     hunger: 10, 
     happiness: 0, 

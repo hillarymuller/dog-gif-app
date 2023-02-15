@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-rails db:reset 
 
 Treat.create([{name: "pup pop"}, {name: "peanut butter"}, {name: "sweet potato"}, 
 {name: "cheese"}, {name: "marshmallow"}, {name: "salmon jerky"}])

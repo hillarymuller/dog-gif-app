@@ -301,8 +301,9 @@ function DogForm({ editMode, dog }) {
                                 onChange={handleCheck}
                                 />
                             </li>
-                        )
-                    })}
+                                )
+                        })
+                    }
                 </label>
                 <button className="button" type="submit">Submit</button>
             </form>

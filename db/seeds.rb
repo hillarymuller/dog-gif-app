@@ -9,7 +9,7 @@
 Treat.create([{name: "pup pop"}, {name: "peanut butter"}, {name: "sweet potato"}, 
 {name: "cheese"}, {name: "marshmallow"}, {name: "salmon jerky"}])
 # 10 Charlies test
-Dog.create([{
+Dog.find_or_create_by([{
     name: "BRISCOE", 
     hunger: 10, 
     happiness: 0, 

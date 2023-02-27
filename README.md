@@ -1,17 +1,23 @@
-# Project Template: React/Rails API
+# PUPPY PLAYTIME
 
 ## Description
 
-This project is scaffolded so that you can build a React frontend and Rails
-backend together, and easily deploy them to Render.
+This application is my Phase 5 project for Flatiron School. The front end, found in the client folder, is a React app, and the back end uses Ruby on Rails in API mode. The goal off the application is to provide a little brain break with gifs of cute dogs for a quick mood boost throughout the workday.
 
-**Note**: if you are not planning to deploy your app to Render and prefer to use
-SQLite, you will need to make the following changes in the project files:
+Check it out here: https://youtu.be/IEabyY6hnlY
 
-1. In the `Gemfile`, replace `gem 'pg', '~> 1.1'` with `gem 'sqlite3', '~>
-   1.4'`.
-2. In the `database.yml` file, change the line `adapter: postgresql` to
-   `adapter: sqlite3`.
+## App Features
+- users can sign up to create an account with a secure password
+- users can log in & log out
+- users can view a list of all dogs, with options to adopt/give the dog back to shelter if they are logged in
+- users can view and take care of the dogs they adopt, along with other dogs in their household
+- users can add a new dog
+- one user, the app creator, can delete and edit existing dogs as well
+
+## Possible Future Features
+- this app would be fun to convert to a mobile app
+- a point system could make it more of a game 
+- notifications when dogs' needs hit certain scores
 
 ## Requirements
 
@@ -23,149 +29,22 @@ SQLite, you will need to make the following changes in the project files:
 See Environment Setup below for instructions on installing these tools if you
 don't already have them.
 
-## Setup
-
-Start by **cloning** (not forking) the project template repository and removing
-the remote:
-
-```console
-$ git clone git@github.com:learn-co-curriculum/project-template-react-rails-api.git your-project-name
-$ cd your-project-name
-$ git remote rm origin
-```
-
-Then, [create a new remote repository][create repo] on GitHub. Head to
-[github.com](https://github.com) and click the **+** icon in the top-right
-corner and follow the steps to create a new repository. **Important**: don't
-check any of the options such as 'Add a README file', 'Add a .gitignore file',
-etc. — since you're importing an existing repository, creating any of those
-files on GitHub will cause issues.
-
-[create repo]: https://docs.github.com/en/github/importing-your-projects-to-github/importing-source-code-to-github/adding-an-existing-project-to-github-using-the-command-line#adding-a-project-to-github-without-github-cli
-
-If you're working with a partner,
-[add them as a collaborator][add collaborator] on GitHub. From your repo on
-GitHub, go to Settings > Manage Access > Invite a collaborator and enter your
-partner's username. Once your partner has access, they should git **clone** (not
-fork) the repository.
-
-[add collaborator]: https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-user-account/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository
-
-Finally, connect the GitHub remote repository to your local repository and push
-up your code:
-
-```console
-$ git remote add origin git@github.com:your-username/your-project-name.git
-$ git push -u origin main
-```
-
-When you're ready to start building your project, run:
-
-```sh
-bundle install
-rails db:create
-npm install --prefix client
-```
-
-You can use the following commands to run the application:
-
-- `rails s`: run the backend on [http://localhost:3000](http://localhost:3000)
-- `npm start --prefix client`: run the frontend on
+## Installation
+Visit https://dog-gif-app.onrender.com/ to use the application or to run it in development mode: 
+1. Fork & clone the repo
+2. Run bundle install to install dependencies
+3. Run rails db:create db:migrate
+4. You can use the following commands to run the application:
+  - `rails s`: run the backend on [http://localhost:3000](http://localhost:3000)
+  - `npm start --prefix client`: run the frontend on
   [http://localhost:4000](http://localhost:4000)
 
-Make sure to also update this README to include documentation about
-your project. Here's a list of some [awesome readmes][] for inspiration.
-
-[awesome readmes]: https://github.com/matiassingers/awesome-readme
-
-## Deploying
-
-This application has all the starter code needed to help you deploy your
-application to Render. It's recommended to deploy your project early and push up
-changes often to ensure that your code works equally well in production and
-development environments.
-
-The instructions in this section assume that you've already set up a Render
-account, created a PostgreSQL instance in your account, and set up your
-environment to deploy to Render. If you have not yet completed these steps, see
-the Environment Setup section below.
-
-### Create a Master Key File
-
-In the project files, delete the `config/credentials.yml.enc` file. Then, in the
-terminal, run the following:
-
-```sh
-$ EDITOR="code --wait" bin/rails credentials:edit
-```
-
-**Note**: if you use a different text editor than VS Code, you will need to replace
-`code` with the appropriate command.
-
-The command above will open a file in VS Code and wait for you to close it
-before completing the process of creating the credential files. Once you've done
-that, you should see both the `credentials.yml.enc` and `master.key` files in
-the `config` folder. You will need the value in the `master.key` file to set up
-the web service in Render.
-
-Commit your changes and push them to GitHub.
-
-### Create the App Database
-
-Render allows users to create [multiple databases within a single PostgreSQL
-instance][multiple dbs] using the PostgreSQL interactive terminal,
-[`psql`][psql].
-
-Navigate to your PostgreSQL instance from the Render dashboard, click the
-"Connect" dropdown, then the External Connection tab, and copy the PSQL command.
-Paste it into your terminal and press enter. This command connects you to the
-remote PostgreSQL instance.
-
-To create the database, run this SQL command:
-
-```sql
-CREATE DATABASE new_db_name;
-```
-
-Now if you run `\l` from the PSQL prompt, you should see a table that includes
-your main PostgreSQL instance as well as the database you just created.
-
-Run the `\q` command to exit PSQL.
-
-[multiple dbs]: https://render.com/docs/databases#multiple-databases-in-a-single-postgresql-instance
-[psql]: https://www.postgresql.org/docs/current/app-psql.html
-
-### Create the Render Web Service
-
-To deploy, click the "New +" button in Render and select "Web Service". You'll
-see a list of all the repositories in your GitHub account. Find the repo you
-want to deploy and click the "Select" button.
-
-In the page that opens, enter a name for your app and make sure the Environment
-is set to Ruby.
-
-Scroll down and set the Build Command to `./bin/render-build.sh` and the Start
-Command to `bundle exec puma -C config/puma.rb`.
-
-Open a separate tab in your browser, navigate to the Render dashboard, and click
-on your PostgreSQL instance. Scroll down to the "Connection" section, find the
-"Internal Database URL", and copy it.
-
-Return to the other tab. Scroll down and click the "Advanced" button, then click
-"Add Environment Variable." Enter `DATABASE_URL` as the key, then paste in the
-URL you just copied. Note that the URL will end with the name you gave your
-PostgreSQL instance when you initially created it; be sure to remove that name
-and replace it with the name of the database you created in the last section.
-
-Click "Add Environment Variable" again. Add `RAILS_MASTER_KEY` as the key, and
-paste the value in the `config/master.key` file you created earlier.
-
-The completed page should look like this:
-
-![Web service settings](https://curriculum-content.s3.amazonaws.com/phase-4/project-template/web-service-settings.png)
-
-Scroll down to the bottom of the page and click "Create Web Service". The deploy
-process will begin automatically.
+## Contributing
+1. Fork the repo
+2. Create your own branch: git checkout -b my-new-branch
+3. Commit your changes: git commit -am "add some feature"
+4. Push your branch: git push origin my-new-branch
+5. Submit a pull request
 
 ## Environment Setup
 
@@ -349,3 +228,14 @@ troubleshoot:
 
 - [Getting Started with Ruby on Rails on Render](https://render.com/docs/deploy-rails)
 - [Render Databases Guide](https://render.com/docs/databases)
+
+## License
+MIT License
+
+Copyright (c) 2023 Hillary Muller
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

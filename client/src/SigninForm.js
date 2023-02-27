@@ -22,7 +22,7 @@ function SigninForm() {
         const success = await signin(formData);
         if (success) {
             setError("Successfully signed in")
-            history.push('/dogs')
+            history.push('/-dogs')
         }
     };
 

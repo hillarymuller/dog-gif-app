@@ -171,7 +171,7 @@ function DogForm({ editMode, dog }) {
         }
     }
     function redirect() {
-        history.push('/dogs')
+        history.push('/-dogs')
     }
     return (
         <div>

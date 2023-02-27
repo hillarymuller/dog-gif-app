@@ -93,11 +93,11 @@ function DogCard({ dog, updateDogs }) {
         <img src={`${image}`} alt={`a cute photo of ${name}`}></img>
         {user && (adopted === false) ? <button className="button" onClick={handleClick}>{(`Adopt ${name}!`)}</button> : null}
         {(user && user.dogs.find(dog => dog.id === currentDog.id)) ? <button className="button" onClick={handleGiveBack}>Give back to shelter</button> : null}
-        {(user && user.household.dogs.find(dog => dog.id === currentDog.id)) ? (<Link className="App-link" to={`/dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
+        {(user && user.household.dogs.find(dog => dog.id === currentDog.id)) ? (<Link className="App-link" to={`/-dogs/${currentDog.id}`}>Take Care of Me!</Link>) : null}
         {(user && user.username.toLowerCase() === "hillarymuller") ? (
         <div>
             <button className="button" onClick={() => handleDelete(id)}>Delete Dog</button> 
-            <Link className="App-link" to={`/dogs/${id}/edit`}>Edit Dog</Link>
+            <Link className="App-link" to={`/-dogs/${id}/edit`}>Edit Dog</Link>
             </div>) : null}
         </div>
     )

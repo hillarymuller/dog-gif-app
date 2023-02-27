@@ -46,7 +46,7 @@ function NavBar() {
             fontWeight: "bolder",
             color: "#D26901"
         }}
-        to='/dogs'>
+        to='/-dogs'>
             All Dogs
         </NavLink>
         <NavLink
@@ -56,7 +56,7 @@ function NavBar() {
             fontWeight: "bolder",
             color: "#D26901"
         }}
-        to={`/users/${user.id}`}>
+        to={`/-users/${user.id}`}>
             My Dogs
         </NavLink>
         <NavLink
@@ -66,7 +66,7 @@ function NavBar() {
             fontWeight: "bolder",
             color: "#D26901"
         }}
-        to={`/households/${user.household.id}`}>
+        to={`/-households/${user.household.id}`}>
             Household Dogs
         </NavLink>
         <NavLink
@@ -76,7 +76,7 @@ function NavBar() {
             fontWeight: "bolder",
             color: "#D26901"
         }}
-        to={`/dogs/new`}>
+        to={`/-dogs/new`}>
             Add a Dog
         </NavLink>
         <button className="button" onClick={handleSignout} >
@@ -91,7 +91,7 @@ function NavBar() {
             fontWeight: "bolder",
             color: "#D26901"
         }}
-        to='/dogs'>
+        to='/-dogs'>
             All Dogs
             </NavLink>
             <NavLink 
@@ -101,7 +101,7 @@ function NavBar() {
                 fontWeight: "bolder",
                 color: "#D26901"
             }}
-            to="/signup">
+            to="/-signup">
                 Sign Up
             </NavLink>
             <NavLink 
@@ -111,7 +111,7 @@ function NavBar() {
                 fontWeight: "bolder",
                 color: "#D26901"
             }}
-            to='/signin'>
+            to='/-signin'>
                 Sign In
             </NavLink>
             </>

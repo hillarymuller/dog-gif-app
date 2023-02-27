@@ -40,30 +40,30 @@ const {user, getCurrentUser} = useContext(UserContext);
         <br></br>
         <ErrorMessage />
        <Switch>
-       <Route path="/dogs/new">
+       <Route path="/-dogs/new">
           <DogForm />
         </Route>
-        <Route path="/dogs/:dogId/edit">
+        <Route path="/-dogs/:dogId/edit">
           <EditDog />
         </Route>
-        <Route path="/dogs/:dogId">
+        <Route path="/-dogs/:dogId">
           <DogPage />
         </Route>
         
-        <Route path="/users/:userId">
+        <Route path="/-users/:userId">
           <UserDogs />
         </Route>
-        <Route path="/households/:householdId">
+        <Route path="/-households/:householdId">
           <HouseholdDogs />
         </Route>
       
-        <Route path="/dogs">
+        <Route path="/-dogs">
           <DogsContainer  />
         </Route>
-        <Route path="/signin">
+        <Route path="/-signin">
           <SigninForm />
         </Route>
-        <Route path="/signup">
+        <Route path="/-signup">
           <SignupForm />
         </Route>
         <Route exact path="/">

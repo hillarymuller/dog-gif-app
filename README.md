@@ -4,7 +4,7 @@
 
 This application is my Phase 5 project for Flatiron School. The front end, found in the client folder, is a React app, and the back end uses Ruby on Rails in API mode. The goal off the application is to provide a little brain break with gifs of cute dogs for a quick mood boost throughout the workday.
 
-Check it out here: https://youtu.be/IEabyY6hnlY
+Check it out here: https://youtu.be/5jx9lfiPz0c
 
 ## App Features
 - users can sign up to create an account with a secure password

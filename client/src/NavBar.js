@@ -22,7 +22,7 @@ function NavBar() {
     function handleSignout(){
         signout();
         setError("Successfully signed out")
-        history.push('/signin')
+        history.push('/-signin')
     }
 
  return (

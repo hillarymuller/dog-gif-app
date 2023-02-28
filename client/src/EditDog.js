@@ -1,14 +1,13 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 import DogForm from './DogForm';
 import {useParams} from 'react-router-dom';
-import {ErrorContext} from './context/error';
+
 
 
 function EditDog() {
     const {dogId} = useParams();
     const [dog, setDog] = useState(null);
-    const {setError} = useContext(ErrorContext);
-    const [editMode, setEditMode] = useState(true);
+   
     
 
     const fetchDog = async () => {
@@ -29,7 +28,7 @@ function EditDog() {
 
     return (
         <div>
-            {dog ? <DogForm editMode={editMode} dog={dog} fetchDog={fetchDog} /> : null}
+            {dog ? <DogForm editMode={true} dog={dog} fetchDog={fetchDog} /> : null}
         </div>
     )
 }

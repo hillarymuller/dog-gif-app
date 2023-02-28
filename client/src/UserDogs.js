@@ -4,7 +4,7 @@ import DogsList from './DogsList';
 import {ErrorContext} from './context/error';
 
 function UserDogs() {
-    const {user, getCurrentUser} = useContext(UserContext);
+    const {user} = useContext(UserContext);
     const [dogs, setDogs] = useState([]);
     const {setError} = useContext(ErrorContext);
 

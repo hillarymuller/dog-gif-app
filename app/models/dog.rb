@@ -7,7 +7,7 @@ class Dog < ApplicationRecord
  
   validates :hunger, :thirst, :energy, :potty, :happiness, numericality: {in: 0..10}
   validates :name, presence: true, uniqueness: true
-  validates :eat_gif, :drink_gif, :pet_gif, :potty_gif, :treat_gif, :nap_gif, :walk_gif, :jog_gif, :play_gif, :image, presence: true, uniqueness: true,
+  validates :eat_gif, :drink_gif, :pet_gif, :potty_gif, :treat_gif, :nap_gif, :walk_gif, :jog_gif, :play_gif, :image, presence: true,
   format: {with: /\A^https:\/\/media\.giphy\.com\/media\/?.*\S+?(?:gif)\z/i}
  
   scope :sort_by_name, -> {self.order(name: :desc)}

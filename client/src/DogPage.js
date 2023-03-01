@@ -288,11 +288,11 @@ function redirect() {
         <h1>{name}</h1>
         {display ? <img src={display} alt={name} className="float"></img> : <img src={image} alt={name} className="float"></img>}
         
-        <h2>Hunger: {hunger}</h2>
-        <h2>Thirst: {thirst}</h2>
+        <h2 style={{color: hunger > 9 ? 'red' : null}}>Hunger: {hunger}</h2>
+        <h2 style={{color: thirst > 9 ? 'red' : null}}>Thirst: {thirst}</h2>
         <h2>Energy: {energy}</h2>
-        <h2>Potty: {potty}</h2>
-        <h2>Happiness: {happiness}</h2>
+        <h2 style={{color: potty > 9 ? 'red' : null}}>Potty: {potty}</h2>
+        <h2 style={{color: happiness < 1 ? 'red' : null}}>Happiness: {happiness}</h2>
         <button className="button" onClick={handleFeed}>Feed me</button>
         <button className="button" onClick={handlePotty}>Potty time</button>
         <button className="button" onClick={handleWalk}>Walk me</button>

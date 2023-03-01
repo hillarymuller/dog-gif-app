@@ -17,7 +17,7 @@ function DogPage() {
 
     
 function redirect() {
-    history.push('/signin')
+    history.push('/-signin')
 }
    const fetchDog = () => {
         fetch(`/dogs/${dogId}`)

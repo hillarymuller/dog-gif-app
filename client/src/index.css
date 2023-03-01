@@ -42,6 +42,16 @@ code {
   font-size: 16px;
   font-weight: bold;
 }
+.hot-button {
+  background-color: red;
+  border: 2px solid #191970;
+  margin: 1rem .25em;
+  color: #191970;
+  border-radius: 10px;
+  padding: 6px 24px;
+  font-size: 16px;
+  font-weight: bold;
+}
 .error {
   color: white;
   background-color:  #D26901;

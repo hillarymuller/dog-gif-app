@@ -290,18 +290,18 @@ function redirect() {
         
         <h2 style={{color: hunger > 9 ? 'red' : null}}>Hunger: {hunger}</h2>
         <h2 style={{color: thirst > 9 ? 'red' : null}}>Thirst: {thirst}</h2>
-        <h2>Energy: {energy}</h2>
+        <h2 style={{color: energy == 10 || energy == 0 ? 'red' : null}}>Energy: {energy}</h2>
         <h2 style={{color: potty > 9 ? 'red' : null}}>Potty: {potty}</h2>
         <h2 style={{color: happiness < 1 ? 'red' : null}}>Happiness: {happiness}</h2>
-        <button className="button" onClick={handleFeed}>Feed me</button>
-        <button className="button" onClick={handlePotty}>Potty time</button>
-        <button className="button" onClick={handleWalk}>Walk me</button>
-        <button className="button" onClick={handleNap}>Nap time</button>
+        <button className={hunger > 9 ? "hot-button" : "button"} onClick={handleFeed}>Feed me</button>
+        <button className={potty > 9 ? "hot-button" : "button"} onClick={handlePotty}>Potty time</button>
+        <button className={energy > 9 ? "hot-button" : "button"} onClick={handleWalk}>Walk me</button>
+        <button className={energy < 1 ? "hot-button" : "button"} onClick={handleNap}>Nap time</button>
         
-        <button className="button" onClick={handlePet}>Pet me</button>
-        <button className="button" onClick={handleJog}>Jog together</button>
-        <button className="button" onClick={handleWater}>Give me water</button>
-        <button className="button" onClick={handlePlay}>Play with me</button>
+        <button className={happiness < 1 ? "hot-button" : "button"} onClick={handlePet}>Pet me</button>
+        <button className={energy > 9 ? "hot-button" : "button"} onClick={handleJog}>Jog together</button>
+        <button className={thirst > 9 ? "hot-button" : "button"} onClick={handleWater}>Give me water</button>
+        <button className={happiness < 1 ? "hot-button" : "button"} onClick={handlePlay}>Play with me</button>
        
         <form onSubmit={handleTreat}>
             <label>
@@ -312,7 +312,7 @@ function redirect() {
                         {treats.map(treat => <option value={treat.name} key={treat.id}>{treat.name}</option>)}
                     </select>
             </label>
-            <button className="button" type="submit">Treat me!</button>
+            <button className={happiness < 1 ? "hot-button" : "button"} type="submit">Treat me!</button>
                    </form> 
         </div>
     )

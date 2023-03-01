@@ -12,7 +12,7 @@
 #   runner "MyModel.some_method"
 #   rake "some:great:rake:task"
 # end
-every 1.hour do
+every 5.minutes do
     rake 'update:update_needs'
 end
 #

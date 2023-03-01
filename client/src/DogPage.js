@@ -37,7 +37,10 @@ function redirect() {
         }
          })
     }
-
+    setInterval(() => {
+        fetchDog();
+    }, 60 * 60 * 1000);
+    
     useEffect(() => {
         fetchDog();
     

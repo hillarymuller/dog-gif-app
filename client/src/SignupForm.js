@@ -42,8 +42,8 @@ function SignupForm() {
         e.preventDefault();
         const success = await signup({...formData, password_confirmation: formData.passwordConfirmation, household_id: formData.householdId});
         if (success) {
-            setError("Successfully signed up!")
-            history.push('/-signin')
+            history.push('/-dogs')
+            setError("Successfully signed up & signed in!")
         }
     }
     

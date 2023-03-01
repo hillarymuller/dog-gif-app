@@ -38,10 +38,11 @@ function UserProvider({ children }) {
             if (resp.ok) {
                 const data = await resp.json()
                 setUser(data)
+                
                 return true
             } else {
                 const errorMessage = await resp.json()
-                setError(errorMessage.error)
+                console.log(errorMessage.error)
                 return false
             }
         } catch(err) {
@@ -61,6 +62,7 @@ function UserProvider({ children }) {
             if (resp.ok) {
                 const data = await resp.json()
                 console.log(data)
+                signin(userDetails)
                 return true
             } else {
                 const errorMessage = await resp.json()

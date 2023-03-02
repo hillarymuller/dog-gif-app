@@ -43,7 +43,10 @@ function redirect() {
 
     useEffect(() => {
         fetchDog();
-    
+        const interval = setInterval(() => {
+            fetchDog();
+        }, 5 * 60 * 1000)
+        return () => clearInterval(interval);
     }, [dogId])
 
     function handleFeed(){
@@ -293,7 +296,7 @@ function redirect() {
         
         <h2 style={{color: hunger > 9 ? 'red' : null}}>Hunger: {hunger}</h2>
         <h2 style={{color: thirst > 9 ? 'red' : null}}>Thirst: {thirst}</h2>
-        <h2 style={{color: energy == 10 || energy == 0 ? 'red' : null}}>Energy: {energy}</h2>
+        <h2 style={{color: energy === 10 || energy === 0 ? 'red' : null}}>Energy: {energy}</h2>
         <h2 style={{color: potty > 9 ? 'red' : null}}>Potty: {potty}</h2>
         <h2 style={{color: happiness < 1 ? 'red' : null}}>Happiness: {happiness}</h2>
         <button className={hunger > 9 ? "hot-button" : "button"} onClick={handleFeed}>Feed me</button>

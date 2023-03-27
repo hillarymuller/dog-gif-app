@@ -35,7 +35,8 @@ Visit https://dog-gif-app.onrender.com/ to use the application or to run it in d
 2. Run bundle install to install dependencies
 3. Run rails db:create db:migrate db:seed
 4. Run npm install --prefix client
-5. You can use the following commands to run the application:
+5. Run whenever --update-crontab --set environment='development'
+6. You can use the following commands to run the application:
   - `rails s`: run the backend on [http://localhost:3000](http://localhost:3000)
   - `npm start --prefix client`: run the frontend on
   [http://localhost:4000](http://localhost:4000)

@@ -2,7 +2,7 @@
 
 ## Description
 
-This application is my Phase 5 project for Flatiron School. The front end, found in the client folder, is a React app, and the back end uses Ruby on Rails in API mode. The goal off the application is to provide a little brain break with gifs of cute dogs for a quick mood boost throughout the workday.
+This application is my Phase 5 project for Flatiron School. The front end, found in the client folder, is a React app, and the back end uses Ruby on Rails in API mode. The goal of the application is to provide a little brain break with gifs of cute dogs for a quick mood boost throughout the workday.
 
 Check it out here: https://youtu.be/5jx9lfiPz0c
 
@@ -30,7 +30,7 @@ See Environment Setup below for instructions on installing these tools if you
 don't already have them.
 
 ## Installation
-Visit https://dog-gif-app.onrender.com/ to use the application or to run it in development mode: 
+To run the application in development mode: 
 1. Fork & clone the repo
 2. Run bundle install to install dependencies
 3. Run rails db:create db:migrate db:seed
